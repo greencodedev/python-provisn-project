@@ -1,0 +1,82 @@
+
+{% load static %}
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+<html>
+    <head>
+        <script type="text/javascript" src="{% static 'jquery-3.4.1.min.js' %}"></script>
+        <link href="{% static 'libs/jqvmap/jqvmap.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'libs/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'libs/datatables/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/app.css' %}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="{% static 'css/member_area.css' %}">
+    </head>
+    <div class="">
+        <div class="content">
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <h3 class="page-title">{{ pagetitle }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <!-- Start Content -->
+                <div class="row">
+                    <div class="col-12">
+                        {% if post.news_image %}<img class="card-img-top img-fluid" src="{{ post.news_image.url }}" alt="Card image cap">{% endif %}
+                        <div class="card-box">
+                            <h1 class="">{% if post.title %}{{ post.title }}{% endif %}</h1>
+                            <p class="published">
+                                <i class="mdi mdi-calendar-month-outline"></i>
+                                {{ post.date_of_event }}
+                                {% for tag in post.tags.all %}
+                                <span class="badge badge-primary tag">
+                                    {{ tag }}
+                                </span>
+                                {% endfor %}
+                            </p>
+                            <p class="text-muted mb-0">
+                                {{ post.text|safe }}
+                            </p>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- end card-box-->
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end card-box-->
+                <div class="addthis_inline_share_toolbox"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor js -->
+    <script src="{% static 'js/vendor.min.js' %}"></script>
+    <!-- KNOB JS -->
+    <script src="{% static 'libs/jquery-knob/jquery.knob.min.js' %}"></script>
+    <!-- Chart JS -->
+    <script src="{% static 'libs/chart-js/Chart.bundle.min.js' %}"></script>
+    <!-- Jvector map -->
+    <script src="{% static 'libs/jqvmap/jquery.vmap.min.js' %}"></script>
+    <script src="{% static 'libs/jqvmap/jquery.vmap.usa.js' %}"></script>
+    <!-- Datatable js -->
+    <script src="{% static 'libs/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'libs/datatables/responsive.bootstrap4.min.js' %}"></script>
+    <!-- Dashboard Init JS -->
+    <script src="{% static 'js/pages/dashboard.init.js' %}"></script>
+    <script src="{% static 'javascript/dashboard.js' %}"></script>
+    <!-- App js -->
+    <script src="{% static 'js/app.js' %}"></script>
+</html>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->

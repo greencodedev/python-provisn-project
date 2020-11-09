@@ -1,0 +1,193 @@
+@font-face {
+    font-family: AktivGrotesk-Bold;
+    src: url("../fonts/AktivGrotesk-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Bold1;
+    src: url("../fonts/AktivGrotesk-Bold1.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Bold2;
+    src: url("../fonts/AktivGrotesk-Bold2.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Bold3;
+    src: url("../fonts/AktivGrotesk-Bold3.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Light;
+    src: url("../fonts/AktivGrotesk-Light.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Light1;
+    src: url("../fonts/AktivGrotesk-Light1.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Light2;
+    src: url("../fonts/AktivGrotesk-Light2.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Light3;
+    src: url("../fonts/AktivGrotesk-Light3.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Medium;
+    src: url("../fonts/AktivGrotesk-Medium.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Medium1;
+    src: url("../fonts/AktivGrotesk-Medium1.otf") format("opentype");
+}
+@font-face {
+    font-family: Harbour-Bold;
+    src: url("../fonts/Harbour-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: Harbour-Medium;
+    src: url("../fonts/Harbour-Medium.otf") format("opentype");
+}
+
+.slides {
+    height:250px !important;
+}
+
+.slider {
+    height: 290px !important;
+}
+
+
+.rounded {
+
+  border-radius: 25px;
+}
+
+main, body {
+    background-color: rgb(42,48,59);
+}
+
+nav, #nav-mobile, footer {
+    background-color: rgb(47, 57, 72) !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3 {
+    font-family: Harbour-Bold;
+}
+
+#logo-container {
+}
+
+.worksHeader {
+    font-family: AktivGrotesk-Medium;
+}
+
+footer {
+    margin-top:200px;
+}
+
+.triangle-down-left {
+    width: 100%;
+    height: 0;
+    padding-bottom: 150px;
+    overflow: hidden;
+}
+.triangle-down-left:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-right: 2500px solid transparent;
+    border-bottom: 150px solid rgb(47, 57, 72);
+}
+
+.triangle-down-left2 {
+    width: 100%;
+    height: 0;
+    padding-bottom: 150px;
+    overflow: hidden;
+}
+.triangle-down-left2:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-right: 2500px solid rgb(47, 57, 72);
+    border-bottom: 150px solid transparent;
+}
+
+/*Down-right pointing*/
+.triangle-down-right {
+    width: 100%;
+    height: 0;
+    padding-top: 100px;
+    overflow: hidden;
+}
+.triangle-down-right:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin-top:-100px;
+
+    border-top: 100px solid rgb(42,48,59);
+    border-right: 2500px solid transparent;
+
+}
+
+/*Up-right pointing*/
+.triangle-up-right {
+    width: 100%;
+    height: 0;
+    padding-left:250px;
+    padding-top: 250px;
+    overflow: hidden;
+}
+.triangle-up-right:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left:-500px;
+    margin-top:-500px;
+
+    border-left: 500px solid transparent;
+    border-top: 500px solid rgb(42,48,59);
+}
+
+@media(max-width:600px) {
+    #navbarimg {
+        height:42px !important;
+        margin-top:7px;
+    }
+}
+
+@media(min-width:601px) {
+    #navbarimg {
+        height:50px;
+        margin-top:7px;
+    }
+
+    main {
+        padding-top:64px;
+    }
+}
+
+#banner-bg canvas{
+    position: absolute;
+    z-index: -1;
+    top:64;
+}
+
+.header-content {
+    z-index:10;
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -64px;
+    visibility: hidden;
+}

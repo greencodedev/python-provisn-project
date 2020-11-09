@@ -1,0 +1,37 @@
+{% extends 'user_area/base.html' %}
+{% block content %}
+<!--
+ToDo: TBD
+-->
+<div class="container content-page">
+    <div class="col-12 mt-4 dashboard-bg p-3" style="border-radius: 1rem">
+        <div class="row">
+            <div class="col-6">
+                <span class="send-eth">
+                    Send <span id="payment-amount"></span> <span id="currency"></span> to the following address
+                </span>
+                <br/>
+                <div class="ref-block mt-1" style="width: 400px;">
+                    <span id="payment-address-field">
+
+                    </span>
+                    <i class="ref-block-icon dripicons-copy" style="right:16px;" onclick="copyToClipboard(document.getElementById('payment-address-field'));"></i>
+                </div>
+            </div>
+            <div class="col-2 offset-4">
+                <span>Status</span>
+                <br/>
+                <span id="payment-status" class="bg-secondary">
+
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(window).on('load', function() {
+        handle_payment_page();
+        setInterval(function(){ handle_payment_page(); }, 3000);
+    });
+</script>
+{% endblock %}

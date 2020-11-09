@@ -1,0 +1,249 @@
+{% load static %}
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Provisn Crypto blockchain analysis.">
+        <meta name="author" content="Provisn">
+
+        <title>Provisn | Your all-inclusive crypto dashboard.</title>
+
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+
+		<!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+        <!-- Themify Icons CSS -->
+        <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+        <!-- Elegant Font Icons CSS -->
+        <link rel="stylesheet" href="{% static 'css/elegant-font-icons.css' %}">
+        <!-- Elegant Line Icons CSS -->
+        <link rel="stylesheet" href="{% static 'css/elegant-line-icons.css' %}">
+		<!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <!-- Slicknav CSS -->
+        <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+        <!-- animate CSS -->
+        <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+		<!-- Venobox CSS -->
+        <link rel="stylesheet" href="{% static 'css/venobox/venobox.css' %}">
+		<!-- OWL-Carousel CSS -->
+        <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+        <!-- swiper CSS -->
+        <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
+		<!-- Main CSS -->
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+		<!-- Responsive CSS -->
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+        <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130484709-2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-130484709-2');
+        </script>
+    </head>
+    <body data-spy="scroll" data-target="#navmenu" data-offset="70">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehSoftwerey.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+
+        <header id="header" class="header_section">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="https://www.provisn.com" class="navbar-brand"><img src="{% static 'img/logo.png' %}" alt="Provisn"></a>
+                    <div class="d-flex menu-wrap">
+                        <div id="navmenu" class="mainmenu">
+                           <ul class="nav">
+
+                               <li><a data-scroll class="nav-link" href="#how">How it works</a></li>
+                               <li><a data-scroll class="nav-link" href="#features">Features</a></li>
+
+                               <li><a data-scroll class="nav-link" href="#pricing">Pricing</a></li>
+                               <li><a data-scroll class="nav-link" href="#"  data-toggle="modal" data-target=".bs-contact-modal-lg">Contact</a></li>
+
+                               {% if user.is_authenticated %}
+                               <li><a data-scroll class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                               {% else %}
+                               <li><a data-scroll class="nav-link" href="{% url 'login' %}">Login</a></li>
+                               {% endif %}
+
+                            </ul>
+                        </div>
+                        <div class="menu-btn">
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'user_area' %}" class="button_1">Member Area</a>
+                            {% else %}
+                            <a href="#download" class="button_1">Start free trial</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-primary" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+		</header> <!-- Header -->
+
+<main>
+		 <div class="container">
+</main>
+         <section id="home" class="hero_section2 gradiant_2 padding">
+
+		            <div class="container">
+                        <div class="row">
+		                <div class="col-md-12 col-sm-12 margin165" style="padding:0">
+		                    <h1 class="wow fadeInLeft" data-wow-delay="100ms" data-wow-duration="900ms">Terms of service</h1>
+
+		                </div>
+
+
+                            </div>
+		            </div>
+		</section>
+
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12" style="margin-top: 30px;">
+
+<ol>
+<li style="font-weight: 400;"><strong>Terms<br /></strong><strong><br /></strong><span style="font-weight: 400;">By accessing the website at https://www.provisn.com, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trademark law.&nbsp;</span></li>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">PROVISN (&ldquo;site&rdquo;, &ldquo;website&rdquo; or &ldquo;service&rdquo; is a service edited by (&ldquo;Our company&rdquo;), located in Amsterdam, Netherlands.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">The service is called PROVISN or Provisn.com in this Term of Use, for the same designation between both names. By using the Provisn.com web site (&ldquo;Service&rdquo;), and any of its services and tools, you are agreeing to be bound by the following terms and conditions (&ldquo;Terms of Service&rdquo;).</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">You must be at least 18 [eighteen] years of age to use this website. By using this website and by agreeing to these terms and conditions, you warrant and represent that you are at least 18 years of age.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">By using this website, products or services, you fully understand and agree to legally comply with this Risk Disclosure, Disclaimer, General Conditions, Cookies Policy and Privacy Policy.</span></li>
+</ol>
+</ol>
+<ol>
+<li style="font-weight: 400;"><strong>Use License<br /><br /></strong></li>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Provisn is not a registered broker, analyst, investment advisor or anything of that sort. Everything that we provide on this site is purely for guidance, informational and educational purposes. All information contained herein should be independently verified and confirmed. We do not accept any liability for any loss or damage whatsoever caused in reliance upon such information or services. Please be aware of the risks involved with any trading done in any financial market. Do not trade with money that you cannot afford to lose. When in doubt, you should consult a qualified financial advisor before making any investment decisions.</span></li>
+</ol>
+</ol>
+<ol>
+<li style="font-weight: 400;"><strong>Disclaimer<br /><br /></strong></li>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">The materials on Provisn&rsquo;s website are provided on an 'as is' basis. Provisn makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Further, Provisn does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Trading and investing in cryptocurrencies (also called digital or virtual currencies, crypto assets, digital assets, altcoins and so on) involves substantial risk of loss and is not suitable for every investor.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">The valuation of cryptocurrencies and futures may fluctuate, and, as a result, clients may lose more than their original investment. The highly leveraged nature of futures trading means that small market movements will have a great impact on your trading account and this can work against you, leading to large losses.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">If the market moves against you, you may sustain a total loss greater than the amount you deposited into your account. You are responsible for all the risks and financial resources you use and for the chosen trading system. You should not engage in trading unless you fully understand the nature of the transactions you are entering into and the extent of your exposure to loss. If you do not fully understand these risks you must seek independent advice from your financial advisor.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">All trading strategies are used at your own risk.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Any content on this site should not be relied upon as advice or construed as providing recommendations of any kind. It is your responsibility to confirm and decide which trades to make. Trade only with risk capital; that is, trade with money that, if lost, will not adversely impact your lifestyle and your ability to meet your financial obligations. Past results are no indication of future performance. In no event should the content of this correspondence be construed as an express or implied promise or guarantee.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Provisn is not responsible for any losses incurred as a result of using any of our trading strategies and indicators.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Information provided in this website is intended solely for informational purposes and is obtained from sources believed to be reliable. Information is in no way guaranteed. No guarantee of any kind is implied or possible where projections of future conditions are attempted.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">None of the content published on this site constitutes a recommendation that any particular cryptocurrency, portfolio of cryptocurrencies, transaction or investment strategy is suitable for any specific person.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">The services and content that we provide are solely for educational purposes. The generic market recommendations provided by us are based solely on the judgment of our personnel and should be considered as such. You acknowledge that you enter into any transactions relying on your own judgment. Any market recommendations provided by us are generic only and may or may not be consistent with the market positions or intentions of our company and/or our affiliates. Any opinions, news, research, analyses, prices, or other information contained on this website are provided as general market commentary, and do not constitute an investment advice.</span></li>
+</ol>
+</ol>
+<ol>
+<li style="font-weight: 400;"><strong>Limitations<br /></strong><strong><br /></strong><span style="font-weight: 400;">In no event shall Provisn or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Provisn's website, even if Provisn or a Provisn authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.</span><span style="font-weight: 400;"><br /><br /></span></li>
+<li style="font-weight: 400;"><strong>Accuracy of materials<br /></strong><strong><br /></strong><span style="font-weight: 400;">The materials appearing on Provisn's website could include technical, typographical, or photographic errors. Provisn does not warrant that any of the materials on its website are accurate, complete or current. Provisn may make changes to the materials contained on its website at any time without notice. However Provisn does not make any commitment to update the materials.<br /><br /></span></li>
+<li style="font-weight: 400;"><strong>Links<br /></strong><strong><br /></strong><span style="font-weight: 400;">Provisn has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Provisn of the site. Use of any such linked website is at the user's own risk.<br /><br /></span></li>
+<li style="font-weight: 400;"><strong>Modifications<br /></strong><strong><br /></strong><span style="font-weight: 400;">Provisn may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.<br /><br /></span></li>
+<li style="font-weight: 400;"><strong>Governing Law<br /></strong><strong><br /></strong><span style="font-weight: 400;">These terms and conditions are governed by and construed in accordance with the laws of Netherlands and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</span></li>
+</ol>
+<p>&nbsp;</p>
+</div>
+        </div>
+</div>
+
+
+		<a data-scroll href="#header" id="scroll-to-top"><i class="arrow_carrot-up"></i></a>
+
+        <div class="modal fade bs-contact-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ContactFormModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title white" id="ContactFormModalLabel">Contact us.</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- CONTACT -->
+                        <section id="contact" class="contact_section padding">
+                           <div class="container">
+
+                                   <div class="register-form2">
+                                       <form method="post" action="#" class="subscribe_form2">
+                                           <!--
+                                           <input type=“name” name=“name” id=“name” class=“form_input” placeholder=“Name”>
+                                           <input type=“email” name=“email” id=“subs-email” class=“form_input” placeholder=“Email”>
+                                           <textarea rows=“4" cols=“50” placeholder=“Message..” class=‘textarea_styled’></textarea>
+                                           -->
+                                           {% csrf_token %}
+                                           {{ MTAform.as_p }}
+                                           <div class="button-contact">
+                                           <button name="MTAform_Button" type="submit" class="submit">Send message</button></div>
+                                           <div id="subscribe-result">
+                                               <p class="subscription-success"></p>
+                                               <p class="subscription-error"></p>
+                                           </div>
+                                       </form>
+                                   </div><!-- Section Heading -->
+                               </div>
+                           </div>
+                        </section><!-- CONTACT -->
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+
+		<!-- jQuery Lib -->
+		<script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+		<!-- Tether JS -->
+		<script src="{% static 'js/vendor/tether.min.js' %}"></script>
+		<!-- Bootstrap JS -->
+		<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+		<!-- waypoints js -->
+		<script src="{% static 'js/vendor/jquery.waypoints.v2.0.3.min.js' %}"></script>
+		<!-- Slicknav JS -->
+		<script src="{% static 'js/vendor/jquery.slicknav.min.js' %}"></script>
+		<!-- OWL-Carousel JS -->
+		<script src="{% static 'js/vendor/owl.carousel.min.js' %}"></script>
+		<!-- swiper JS -->
+	    <script src="{% static 'js/vendor/swiper.min.js' %}"></script>
+		<!-- Counterup JS -->
+		<script src="{% static 'js/vendor/jquery.counterup.min.js' %}"></script>
+		<!-- Smooth Scroll JS -->
+		<script src="{% static 'js/vendor/smooth-scroll.min.js' %}"></script>
+		<!-- vendor JS -->
+		<script src="{% static 'js/vendor/venobox.min.js' %}"></script>
+		<!-- Ajaxchimp JS -->
+		<script src="{% static 'js/vendor/jquery.ajaxchimp.min.js' %}"></script>
+		<!-- Particle JS -->
+        <script src="{% static 'js/vendor/particles.min.js' %}"></script>
+		<!-- App JS -->
+        <script src="{% static 'js/vendor/app.js' %}"></script>
+		<!-- Wow JS -->
+		<script src="{% static 'js/vendor/wow.min.js' %}"></script>
+		<!-- Main JS -->
+		<script src="{% static 'js/main.js' %}"></script>
+
+        <script src="https://kit.fontawesome.com/3eaab551dc.js"></script>
+
+        <!-- Inline CSS from file to load static files -->
+        <style>
+
+        </style>
+    </body>
+</html>
+
+
+

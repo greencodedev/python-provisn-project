@@ -1,0 +1,169 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+
+                        <h4 class="page-title">Token Watchlist</h4>
+                    </div>
+                    {% if user.is_superuser or user.is_staff %}
+                        {% if not post.published_date %}
+                        <a style="" class="btn btn-primary" href="{% url 'PublishTW' pk=post.pk %}">Publish</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!-- Start Content -->
+            <div class="row">
+                <div class="col-md-12 content-list-block-tw">
+					<div class="d-none cp_id">{{ post.coin.coinpaprika_id }}</div>
+					<div class="row">
+						<!-- <div class="col-2 tw-image bitcoin-img">
+							<img class="">
+						</div> -->
+						<div class="col-12 bitcoin-short-info">
+							<div class="row tw-short-info no-margin-side">
+								<div class="col-4 row no-margin coin-title">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 align-center" style="min-width: 150px;">
+										<div class="col-2 tw-image bitcoin-img">
+											<img class="" src="{% if post.coin_icon %}{{ post.coin_icon.url }}{% endif %}" style="margin-top: -5px;">
+										</div>
+										{% if user.is_superuser or user.is_staff %}
+											<a href='{% url "DetailsTW" pk=post.pk %}'>
+										{% endif %}
+										<h3 class=""><!-- Token Name -->
+											<span id="token-name" style="margin-left: 20px;">{{ post.title }}</span>
+											<sup><span class="short-name sup-text">{{ post.coin.name }}</span></sup>
+										</h3>
+										{% if user.is_superuser or user.is_staff %}
+											</a>
+										{% endif %}
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 align-center" style="display: inline-flex; min-width: 150px;">
+										<!-- <h5>Current</h5> -->
+										<div class="current_value">
+											<span>Loading...</span>
+										</div>
+										<div class="ranking">#<span class="rank_container"></span></div>
+									</div>
+								</div>
+								<div class="col-6 row no-margin coin-info">
+									<div class="col-2 market_cap">
+										<h4>Market cap</h4>
+										<p>
+											Loading...
+										</p>
+									</div>
+									<div class="col-2 24h_volume">
+										<h4>24h Volume</h4>
+										<p>
+											Loading...
+										</p>
+									</div>
+									<div class="col-4 circ_supply">
+										<h4>Circ. Supply / Max. supply</h4>
+										<p>
+											Loading...
+										</p>
+									</div>
+									<div class="col-2 24h_change">
+										<h4>Change 24h</h4>
+										<p>
+											Loading...
+										</p>
+									</div>
+									<div class="col-2 7d_change">
+										<h4>Change 7d</h4>
+										<p>
+											Loading...
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<p></p>
+							<div class="tw-description">
+								Loading...
+							</div>
+							<p><br/></p>
+						</div>
+						<!-- Tab Area -->
+						<div class="col-12">
+							<nav>
+								<div class="nav nav-tabs" id="nav-tab" role="tablist">
+									<a class="nav-item nav-link active" id="tw-about-tab{{ post.pk }}" data-toggle="tab" href="#tw-about{{ post.pk }}" role="tab" aria-controls="tw-about{{ post.pk }}" aria-selected="false">About</a>
+									<a class="nav-item nav-link" id="tw-social-tab{{ post.pk }}" data-toggle="tab" href="#tw-social{{ post.pk }}" role="tab" aria-controls="tw-social{{ post.pk }}" aria-selected="false">Social</a>
+                                    {% if post.Product %}
+                                        <a class="nav-item nav-link" id="tw-Product-tab{{ post.pk }}" data-toggle="tab" href="#tw-Product{{ post.pk }}" role="tab" aria-controls="tw-Product{{ post.pk }}" aria-selected="false">Product</a>
+                                    {% endif %}
+                                    {% if post.Team %}
+									    <a class="nav-item nav-link" id="tw-Team-tab{{ post.pk }}" data-toggle="tab" href="#tw-Team{{ post.pk }}" role="tab" aria-controls="tw-Team{{ post.pk }}" aria-selected="false">Team</a>
+                                    {% endif %}
+                                    {% if post.Value %}
+									    <a class="nav-item nav-link" id="tw-Value-tab{{ post.pk }}" data-toggle="tab" href="#tw-Value{{ post.pk }}" role="tab" aria-controls="tw-Value{{ post.pk }}" aria-selected="false">Value</a>
+                                    {% endif %}
+								</div>
+							</nav>
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="tw-about{{ post.pk }}" role="tabpanel" aria-labelledby="nav-about-tab">
+									<p>{{ post.About|safe }}</p>
+								</div>
+								<div class="tab-pane fade tw-links" id="tw-social{{ post.pk }}" role="tabpanel" aria-labelledby="nav-social-tab">
+								</div>
+                                {% if post.Product %}
+                                    <div class="tab-pane fade" id="tw-Product{{ post.pk }}" role="tabpanel" aria-labelledby="nav-Product-tab">
+                                        {{ post.Product|safe }}
+                                    </div>
+                                {% endif %}
+                                {% if post.Team %}
+                                    <div class="tab-pane fade" id="tw-Team{{ post.pk }}" role="tabpanel" aria-labelledby="nav-Team-tab">
+                                        {{ post.Team|safe }}
+                                    </div>
+                                {% endif %}
+								{% if post.Value %}
+								    <div class="tab-pane fade" id="tw-Value{{ post.pk }}" role="tabpanel" aria-labelledby="nav-Value-tab">
+                                        {{ post.Value|safe }}
+								    </div>
+                                {% endif %}
+							</div>
+						</div>
+						<!-- End Tab Area -->
+						<div class="col-12">
+							<i class="mdi mdi-calendar-month-outline"></i>
+							{{ post.published_date|naturaltime }}
+						</div>
+					</div>
+				</div>
+                <!-- end row -->
+            </div>
+            <!-- end card-box-->
+        </div>
+    </div>
+</div>
+<script>
+	$(document).ready(function () {
+		get_currency_info();
+		update_currency_values();
+	});
+	window.setInterval(function() {
+		update_currency_values();
+	}, 60000);
+</script>
+{% endblock %}

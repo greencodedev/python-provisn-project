@@ -1,0 +1,31 @@
+{% autoescape off %}
+
+    <head>
+
+    </head>
+    <body style='background-color:#333333; font-family: Helvetica; '>
+        <div style='width:55%;margin-left:auto;margin-right:auto;margin-top:3rem;'>
+            <a href="https://www.provisn.com"><img style='width:15%; margin-bottom:30px' src='https://provisn.com/static/img/logo.png'></a>
+            <div style='margin-left:auto;float:right;color:#f0f0f0;margin-top:10px'>
+                Follow our socials
+                <a href="https://t.me/joinchat/HaeSp1VPMcRho7xIHAow0Q"><img style='height:16px;' src='https://provisn.com/static/img/telegram.png'></a>
+                <a href="https://twitter.com/pro_visn"><img style='height:16px;' src='https://provisn.com/static/img/twitter.png'></a>
+                <a href="https://www.facebook.com/provisnlive/"><img style='height:16px;' src='https://provisn.com/static/img/fb.png'></a>
+                <a href="https://www.instagram.com/provisn/"><img style='height:16px;' src='https://provisn.com/static/img/insta.png'></a>
+            </div>
+            <div style='background-color: #222222;color:#f0f0f0;padding:3rem 3rem 3rem 3rem; border-radius: 1rem; margin-bottom:150px'>
+                <p style="line-height: 2;">
+                    Hi {{ user.username }}, <br/>
+                    Please click on the link or copy it to your browser to confirm your registration for Provisn.com
+                    <br/><br>
+                    <a href="https://provisn.com{% url 'activate' uidb64=uid token=token %}" style="background: #42A9F2;color: white; padding:7 17; border-radius: 3px; text-decoration: none;">Click here</a>
+                    <br/><br/>
+                    <small style="color: grey !important; font-size: 10px; text-decoration:none;">Or copy this URL: <a href="https://provisn.com{% url 'activate' uidb64=uid token=token %}" style="color: grey; text-decoration: none;">https://provisn.com{% url 'activate' uidb64=uid token=token %}</a></small>
+                </p>
+            </div>
+
+        </div>
+    </body>
+
+
+{% endautoescape %}

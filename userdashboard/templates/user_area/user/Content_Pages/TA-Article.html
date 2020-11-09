@@ -1,0 +1,85 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+        <!-- Start Content-->
+        <div class="container-fluid">
+                        
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h3 class="page-title">Technical Analysis</h3>
+                    </div>
+                    {% if user.is_superuser or user.is_staff %}
+                        {% if not post.published_date %}
+                        <a style="" class="btn btn-primary" href="{% url 'PublishTA' pk=post.pk %}">Publish</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!-- Start Content -->
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card-box content-list-block content-list-block-ta">
+                        <h3 class="float-right">
+                            {% if post.coin.coin_icon %}
+                            <img class="cryptocurrency-icons-content-list-page" src="{{ post.coin.coin_icon.url }}"/>
+                            {% endif %}
+                            {{ post.coin.short_name }}
+                        </h3>
+
+                        <h1 class="dashboardTitle ta-title">
+                            {% if post.title %} {{ post.title }} {% endif %}
+                        </h1>
+                        <div>
+                            <div class="ta-diagram">
+                                {{ post.diagram_embed|safe }}
+                            </div>
+                            <div class="ta-text">
+                                {{ post.text|safe }}
+                            </div>
+                        </div>
+                        <p class="published2">
+                            <i class="mdi mdi-calendar-month-outline"></i>
+                            {{ post.published_date|naturaltime }}
+                            {% for tag in post.tags.all %}
+                            <a href="{% url 'search' %}?q={{tag}}">
+                                <span class="badge badge-primary tag">
+                                    {{ tag }}
+                                </span>
+                            </a>
+                            {% endfor %}
+                        </p>
+                        {% if post.coin.coinmarketcap_url %}
+                        <a href="{{ post.coin.coinmarketcap_url }}">
+                            <button type="button" class="btn btn-outline-primary waves-effect waves-light width-md">View on Coinmarketcap</button>
+                        </a>
+                        {% endif %}
+                    </div>
+
+                </div><!-- end col -->
+            </div>
+            <!-- end card-box-->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+</div>
+
+{% endblock %}

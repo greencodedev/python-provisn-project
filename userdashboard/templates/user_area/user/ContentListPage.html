@@ -1,0 +1,193 @@
+{% extends 'user_area/base.html' %}
+{% block content %}
+
+
+
+    <div class="container content-page">
+        <!--
+            Header
+        -->
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+
+                        <h4 class="page-title">{{ pagetitle }}</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+        {% if user.is_superuser or user.is_staff %}
+            {% if PageRefAddContent == 'NewBeams' %}
+                <div class="fixed-action-btn">
+                  <a class="btn-floating btn-large red tooltipped pulse" data-position="left" data-tooltip="Staff Content Management">
+                    <i class="large material-icons">mode_edit</i>
+                  </a>
+                  <ul>
+                    <li><a href="{% url 'NewBeams' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="New Post"><i class="material-icons left">add</i></a></li>
+                    <li><a href="/cpanel/userdashboard/beam/" class="btn-floating red tooltipped" data-position="left" data-tooltip="Manage Content"><i class="material-icons left">edit</i></a></li>
+                    <li><a href="{% url 'DraftsBeams' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="Drafts"><i class="material-icons left">drafts</i></a></li>
+                  </ul>
+                </div>
+            {% endif %}
+            {% if PageRefAddContent == 'NewBlockchainEvents' %}
+                <div class="fixed-action-btn">
+                  <a class="btn-floating btn-large red tooltipped pulse" data-position="left" data-tooltip="Staff Content Management">
+                    <i class="large material-icons">mode_edit</i>
+                  </a>
+                  <ul>
+                    <li><a href="{% url 'NewEvents' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="New Post"><i class="material-icons left">add</i></a></li>
+                    <li><a href="/cpanel/userdashboard/blockchainevent/" class="btn-floating red tooltipped" data-position="left" data-tooltip="Manage Content"><i class="material-icons left">edit</i></a></li>
+                    <li><a href="{% url 'NewEvents' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="Drafts"><i class="material-icons left">drafts</i></a></li>
+                  </ul>
+                </div>
+            {% endif %}
+            {% if PageRefAddContent == 'NewBlockchainNews' %}
+                <div class="fixed-action-btn">
+                  <a class="btn-floating btn-large red tooltipped pulse" data-position="left" data-tooltip="Staff Content Management">
+                    <i class="large material-icons">mode_edit</i>
+                  </a>
+                  <ul>
+                    <li><a href="{% url 'NewBN' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="New Post"><i class="material-icons left">add</i></a></li>
+                    <li><a href="/cpanel/userdashboard/blockchainnew/" class="btn-floating red tooltipped" data-position="left" data-tooltip="Manage Content"><i class="material-icons left">edit</i></a></li>
+                    <li><a href="{% url 'NewBN' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="Drafts"><i class="material-icons left">drafts</i></a></li>
+                  </ul>
+                </div>
+            {% endif %}
+            {% if PageRefAddContent == 'NewMarketIntuition' %}
+                <div class="fixed-action-btn">
+                  <a class="btn-floating btn-large red tooltipped pulse" data-position="left" data-tooltip="Staff Content Management">
+                    <i class="large material-icons">mode_edit</i>
+                  </a>
+                  <ul>
+                    <li><a href="{% url 'NewMarketIntuition' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="New Post"><i class="material-icons left">add</i></a></li>
+                    <li><a href="/cpanel/userdashboard/marketintuition/" class="btn-floating red tooltipped" data-position="left" data-tooltip="Manage Content"><i class="material-icons left">edit</i></a></li>
+                    <li><a href="{% url 'NewMarketIntuition' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="Drafts"><i class="material-icons left">drafts</i></a></li>
+                  </ul>
+                </div>
+            {% endif %}
+            {% if PageRefAddContent == 'NewMemberPerks' %}
+                <div class="fixed-action-btn">
+                  <a class="btn-floating btn-large red tooltipped pulse" data-position="left" data-tooltip="Staff Content Management">
+                    <i class="large material-icons">mode_edit</i>
+                  </a>
+                  <ul>
+                    <li><a href="{% url 'NewMemberPerks' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="New Post"><i class="material-icons left">add</i></a></li>
+                    <li><a href="/cpanel/userdashboard/memberperk/" class="btn-floating red tooltipped" data-position="left" data-tooltip="Manage Content"><i class="material-icons left">edit</i></a></li>
+                    <li><a href="{% url 'NewMemberPerks' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="Drafts"><i class="material-icons left">drafts</i></a></li>
+                  </ul>
+                </div>
+            {% endif %}
+            {% if PageRefAddContent == 'NewAI' %}
+                <div class="fixed-action-btn">
+                  <a class="btn-floating btn-large red tooltipped pulse" data-position="left" data-tooltip="Staff Content Management">
+                    <i class="large material-icons">mode_edit</i>
+                  </a>
+                  <ul>
+                    <li><a href="{% url 'NewAIEntry' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="New Post"><i class="material-icons left">add</i></a></li>
+                    <li><a href="/cpanel/userdashboard/artificialintelligence/" class="btn-floating red tooltipped" data-position="left" data-tooltip="Manage Content"><i class="material-icons left">edit</i></a></li>
+                    <li><a href="{% url 'NewAIEntry' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="Drafts"><i class="material-icons left">drafts</i></a></li>
+                  </ul>
+                </div>
+            {% endif %}
+            {% if PageRefAddContent == 'NewTA' %}
+                <div class="fixed-action-btn">
+                  <a class="btn-floating btn-large red tooltipped pulse" data-position="left" data-tooltip="Staff Content Management">
+                    <i class="large material-icons">mode_edit</i>
+                  </a>
+                  <ul>
+                    <li><a href="{% url 'NewTA' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="New Post"><i class="material-icons left">add</i></a></li>
+                    <li><a href="/cpanel/userdashboard/technicalanalysi/" class="btn-floating red tooltipped" data-position="left" data-tooltip="Manage Content"><i class="material-icons left">edit</i></a></li>
+                    <li><a href="{% url 'NewTA' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="Drafts"><i class="material-icons left">drafts</i></a></li>
+                  </ul>
+                </div>
+            {% endif %}
+            {% if PageRefAddContent == 'NewTW' %}
+                <div class="fixed-action-btn">
+                  <a class="btn-floating btn-large red tooltipped pulse" data-position="left" data-tooltip="Staff Content Management">
+                    <i class="large material-icons">mode_edit</i>
+                  </a>
+                  <ul>
+                    <li><a href="{% url 'NewTW' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="New Post"><i class="material-icons left">add</i></a></li>
+                    <li><a href="/cpanel/userdashboard/tokenwatchlist/" class="btn-floating red tooltipped" data-position="left" data-tooltip="Manage Content"><i class="material-icons left">edit</i></a></li>
+                    <li><a href="{% url 'NewTW' %}" class="btn-floating red tooltipped" data-position="left" data-tooltip="Drafts"><i class="material-icons left">drafts</i></a></li>
+                  </ul>
+                </div>
+            {% endif %}
+        {% endif %}
+
+
+        <!--
+            Actual Content
+        -->
+        <div class="row">
+            {% if PageRefAddContent == 'NewBlockchainEvents' %}
+                <iframe class="col s12" style="padding: 0 0 0 0; height: 100%; height: -moz-available;width: -webkit-fill-available; height: fill-available; border:none;" src="{% url 'cal:calendar' %}"></iframe>
+            {% endif %}
+        {% for c in items %}
+
+            <div class="contentPageBlock col s12" style="{% if pagetitle == 'Artificial Intelligence' %}min-height:auto;{% endif %}">
+                <div class="contentPageBlockWrapper">
+                    <small style="float: right; font-family:Courier;" class="grey-text text-lighten-3">
+                        <span class="right">{{ c.published_date }}{% if searchPage %} in <b>{{ c.get_model_name }}</b>{% endif %}</span>
+                        <br/>
+                        <img class="preview-image-container" style=""/>
+                    </small>
+                    <span class="grey-text text-lighten-5"><h3>{{ c.title }}</h3> </span>
+                    <div class="" style="min-height:225px;">
+                        <div class="clickable-img contentPageText grey-text text-lighten-4" style="">
+                            {% autoescape off %}{{ c.text|safe|truncatechars:1024 }}{% endautoescape %}
+                        </div>
+                    </div>
+                    <p></p>
+                    <div class=""></div>
+                    {% if PageRefAddContent == 'NewBeams' %}
+                        <a class="btn waves-effect hoverable" style="" href="{% url 'DetailsBeams' pk=c.pk %}"><span class="">View Post</span></a>
+                    {% endif %}
+                    {% if PageRefAddContent == 'NewBlockchainEvents' %}
+                        <a class="btn waves-effect hoverable" style="" href="{% url 'DetailsEvents' pk=c.pk %}"><span class="">View Post</span></a>
+                    {% endif %}
+                    {% if PageRefAddContent == 'NewBlockchainNews' %}
+                        <a class="btn waves-effect hoverable" style="" href="{% url 'DetailsNews' pk=c.pk %}"><span class="">View Post</span></a>
+                    {% endif %}
+                    {% if PageRefAddContent == 'NewMarketIntuition' %}
+                        <a class="btn waves-effect hoverable" style="" href="{% url 'DetailsMarketIntuition' pk=c.pk %}"><span class="">View Post</span></a>
+                    {% endif %}
+                    {% if PageRefAddContent == 'NewMemberPerks' %}
+                        <a class="btn waves-effect hoverable" style="" href="{% url 'DetailsMemberPerks' pk=c.pk %}"><span class="">View Post</span></a>
+                    {% endif %}
+                    {% if PageRefAddContent == 'NewAI' %}
+                        <a class="btn waves-effect hoverable" style="" href="{% url 'DetailsAI' pk=c.pk %}"><span class="">View Post</span></a>
+                    {% endif %}
+                    {% if PageRefAddContent == 'NewTA' %}
+                        <a class="btn waves-effect hoverable" style="" href="{% url 'DetailsTA' pk=c.pk %}"><span class="">View Post</span></a>
+                    {% endif %}
+                    {% if PageRefAddContent == 'NewTW' %}
+                        <a class="btn waves-effect hoverable" style="" href="{% url 'DetailsTW' pk=c.pk %}"><span class="">View Post</span></a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+
+            <div class="center grey-text text-lighten-3" style="height:100px;"><!-- Don't ask why height:100px; without this tag at all, the read more stopped working -->
+                {% if items.has_previous %}
+                    <a class="" href="?page=1" style="margin-right:10px;">&laquo; first</a>
+                    <a class="" href="?page={{ items.previous_page_number }}" style="margin-right:10px;">previous</a>
+                {% endif %}
+                <span class="current">
+                    Page {{ items.number }} of {{ items.paginator.num_pages }}.
+                </span>
+
+                {% if items.has_next %}
+                    <a class="" href="?page={{ items.next_page_number }}" style="margin-left:10px;">next</a>
+                    <a class="" href="?page={{ items.paginator.num_pages }}" style="margin-left:10px;">last &raquo;</a>
+                {% endif %}
+            </div>
+    </div>
+{% endblock %}

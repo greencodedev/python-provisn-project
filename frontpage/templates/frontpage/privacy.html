@@ -1,0 +1,268 @@
+{% load static %}
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Provisn Crypto blockchain analysis.">
+        <meta name="author" content="Provisn">
+
+        <title>Provisn | Your all-inclusive crypto dashboard.</title>
+
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+
+		<!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+        <!-- Themify Icons CSS -->
+        <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+        <!-- Elegant Font Icons CSS -->
+        <link rel="stylesheet" href="{% static 'css/elegant-font-icons.css' %}">
+        <!-- Elegant Line Icons CSS -->
+        <link rel="stylesheet" href="{% static 'css/elegant-line-icons.css' %}">
+		<!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <!-- Slicknav CSS -->
+        <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+        <!-- animate CSS -->
+        <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+		<!-- Venobox CSS -->
+        <link rel="stylesheet" href="{% static 'css/venobox/venobox.css' %}">
+		<!-- OWL-Carousel CSS -->
+        <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+        <!-- swiper CSS -->
+        <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
+		<!-- Main CSS -->
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+		<!-- Responsive CSS -->
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+        <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130484709-2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-130484709-2');
+        </script>
+    </head>
+    <body data-spy="scroll" data-target="#navmenu" data-offset="70">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehSoftwerey.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+
+        <header id="header" class="header_section">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="https://www.provisn.com" class="navbar-brand"><img src="{% static 'img/logo.png' %}" alt="Provisn"></a>
+                    <div class="d-flex menu-wrap">
+                        <div id="navmenu" class="mainmenu">
+                           <ul class="nav">
+
+                               <li><a data-scroll class="nav-link" href="#how">How it works</a></li>
+                               <li><a data-scroll class="nav-link" href="#features">Features</a></li>
+
+                               <li><a data-scroll class="nav-link" href="#pricing">Pricing</a></li>
+                               <li><a data-scroll class="nav-link" href="#"  data-toggle="modal" data-target=".bs-contact-modal-lg">Contact</a></li>
+
+                               {% if user.is_authenticated %}
+                               <li><a data-scroll class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                               {% else %}
+                               <li><a data-scroll class="nav-link" href="{% url 'login' %}">Login</a></li>
+                               {% endif %}
+
+                            </ul>
+                        </div>
+                        <div class="menu-btn">
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'user_area' %}" class="button_1">Member Area</a>
+                            {% else %}
+                            <a href="#download" class="button_1">Start free trial</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-primary" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+		</header> <!-- Header -->
+
+<main>
+		 <div class="container">
+</main>
+         <section id="home" class="hero_section2 gradiant_2 padding">
+
+		            <div class="container">
+                        <div class="row">
+		                <div class="col-md-12 col-sm-12 margin165" style="padding:0">
+		                    <h1 class="wow fadeInLeft" data-wow-delay="100ms" data-wow-duration="900ms">Privacy Policy</h1>
+
+		                </div>
+
+
+                            </div>
+		            </div>
+		</section>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="margin-top: 30px;">
+
+                <p><span style="font-weight: 400;">Provisn (the &ldquo;Company&rdquo;) is committed to protecting the privacy of its users. This Privacy Policy (&ldquo;Privacy Policy&rdquo;) is designed to help you understand what information we gather, how we use it, what we do to protect it, and to assist you in making informed decisions when using our Service. Unless otherwise indicated below, this Privacy Policy applies to any website that references this Privacy Policy, any Company website, as well as any data the Company may collect across partnered and unaffiliated sites.</span></p>
+<p><span style="font-weight: 400;">For purposes of this Agreement, &ldquo;Service&rdquo; refers to the Company&rsquo;s service which can be accessed via our website at https://www.provisn.com or through our mobile application. The terms &ldquo;we,&rdquo; &ldquo;us,&rdquo; and &ldquo;our&rdquo; refer to the Company. &ldquo;You&rdquo; refers to you, as a user of Service.</span></p>
+<p><span style="font-weight: 400;">For purposes of this Agreement, &ldquo;Service&rdquo; refers to the Company&rsquo;s service which can be accessed via our website at http://cindicator.com or through. The terms &ldquo;we,&rdquo; &ldquo;us,&rdquo; and &ldquo;our&rdquo; refer to the Company (Cindicator LTD). &ldquo;You&rdquo; refers to you, as a user of Service.</span></p>
+<h3>1. CONSENT</h3>
+<p><span style="font-weight: 400;">By accessing our Service, you accept our Privacy Policy and Terms of Use, and you consent to our collection, storage, use and disclosure of your personal information as described in this Privacy Policy. In addition, by using our Service, or services across partnered and unaffiliated sites, you are accepting the policies and practices described in this Privacy Policy. Each time you visit our website, or use the Service, and any time you voluntarily provide us with information, you agree that you are consenting to our collection, use and disclosure of the information that you provide, and you are consenting to receive emails or otherwise be contacted, as described in this Privacy Policy. Whether or not you register or create any kind of account with us, this Privacy Policy applies to all users of the website and the Service.</span></p>
+<h3>2. INFORMATION WE COLLECT</h3>
+<p><span style="font-weight: 400;">We may collect both &ldquo;Non-Personal Information&rdquo; and &ldquo;Personal Information&rdquo; about you. &ldquo;Non-Personal Information&rdquo; includes information that cannot be used to personally identify you, such as anonymous usage data, general demographic information we may collect, referring/exit pages and URLs, platform types, preferences you submit and preferences that are generated based on the data you submit and number of clicks. &ldquo;Personal Information&rdquo; includes information that can be used to personally identify you, such as your name, address and email address.</span></p>
+<p><span style="font-weight: 400;">In addition, we may also track information provided to us by your browser or by our mobile application when you view or use the Service, such as the website you came from (known as the &ldquo;referring URL&rdquo;), the type of browser you use, the device from which you connected to the Service, the time and date of access, and other information that does not personally identify you. We use this information for, among other things, the operation of the Service, to maintain the quality of the Service, to provide general statistics regarding use of the Service and for other business purposes. We track this information using cookies, or small text files which include an anonymous unique identifier. Cookies are sent to a user&rsquo;s browser from our servers and are stored on the user&rsquo;s computer hard drive. Sending a cookie to a user&rsquo;s browser enables us to collect Non-Personal Information about that user and keep a record of the user&rsquo;s preferences when utilizing our services, both on an individual and aggregate basis. The Company may use both persistent and session cookies; persistent cookies remain on your computer after you close your session and until you delete them, while session cookies expire when you close your browser. Persistent cookies can be removed by following your Internet browser help file directions. If you choose to disable cookies, some areas of the Service may not work properly.</span></p>
+<h3>3. HOW WE USE AND SHARE INFORMATION</h3>
+<p><span style="font-weight: 400;">Personal Information:</span></p>
+<p><span style="font-weight: 400;">In general, we do not sell, trade, rent or otherwise share your Personal Information with third parties without your consent. We may share your Personal Information with vendors and other third-party providers who are performing services for the Company. In general, the vendors and third-party providers used by us will only collect, use and disclose your information to the extent necessary to allow them to perform the services they provide for the Company. For example, when you provide us with personal information to complete a transaction, verify your credit card, place an order, arrange for a delivery, or return a purchase, you consent to our collecting and using such personal information for that specific purpose, including by transmitting such information to our vendors (and their service providers) performing these services for the Company.</span></p>
+<p><span style="font-weight: 400;">However, certain third-party service providers, such as payment processors, have their own privacy policies in respect of the information that we are required to provide to them in order to use their services. For these third-party service providers, we recommend that you read their privacy policies so that you can understand the manner in which your Personal Information will be handled by such providers.</span></p>
+<p><span style="font-weight: 400;">In addition, we may disclose your Personal Information if required to do so by law or if you violate our Terms of Use.</span></p>
+<p><span style="font-weight: 400;">Non-Personal Information:</span></p>
+<p><span style="font-weight: 400;">In general, we use Non-Personal Information to help us improve the Service and customize the user experience. We also aggregate Non-Personal Information in order to track trends and analyze use patterns of the Service. This Privacy Policy does not limit in any way our use or disclosure of Non-Personal Information and we reserve the right to use and disclose such Non-Personal Information to our partners, advertisers and other third parties at our sole discretion.</span></p>
+<h3>4 TWITTER CONVERSION TRACKING AND TAILORED AUDIENCE</h3>
+<p><span style="font-weight: 400;">On our website, we use the Conversion Tracking Service of Twitter Inc. (1355 Market Street #900, San Francisco, California 94103, &ldquo;Twitter&rdquo;). Twitter stores a cookie on the user&rsquo;s computer to enable an analysis of the use of our online products and services. Twitter Conversion Tracking tracks the actions of users after they have viewed ads or interacted with ads on Twitter. Twitter&rsquo;s Conversion Tracking allows you to assign conversions such as link clicks, retweets or &ldquo;like&rdquo; data. The legal basis for the use of this service is Art. 6 paragraph 1 sentence 1 letter f GDPR. If you wish to object to tracking, you can do so using the Digital Advertising Alliance tool at optout.aboutads.info. Twitter is certified under the Privacy Shield Agreement and thus guarantees its compliance with European data protection legislation: (</span><a href="https://www.privacyshield.gov/participant?id=a2zt0000000TORzAAO&amp;status=Active"><span style="font-weight: 400;">https://www.privacyshield.gov/participant?id=a2zt0000000TORzAAO&amp;status=Active</span></a><span style="font-weight: 400;">)</span></p>
+<p><span style="font-weight: 400;">Tailored audiences is the tool of Twitter Inc., 1355 Market Street, Suite 900, San Francisco, CA 94103, USA, www.twitter.com (&ldquo;Twitter&rdquo;), used to target existing users and customers to create remarketing campaigns. Targeting activity can include directly reaching out to users or visitors to the Omenics website and campaign pages and/or retargeting previous customer lists. Twitter sets a minimum size limit for a tailored audience to 500 users. If the tailored audience does not match 500 Twitter users, it will display as "audience too small" and will not be available for targeting. Details about Twitter&rsquo;s policies for conversion tracking and tailored audiences can be found at </span><a href="https://business.twitter.com/en/help/ads-policies/other-policy-requirements/policies-for-conversion-tracking-and-tailored-audiences.html"><span style="font-weight: 400;">https://business.twitter.com/en/help/ads-policies/other-policy-requirements/policies-for-conversion-tracking-and-tailored-audiences.html</span></a><span style="font-weight: 400;">.</span></p>
+<h3>5. FACEBOOK</h3>
+<p><span style="font-weight: 400;">We use Facebook&rsquo;s Software Development Kit (SDK) within our app. The Facebook SDK is issued and administered by Facebook. By means of this integration, we can link various Facebook services with our app. For example, this enables users to be able to use the Facebook SDK to share content from our apps within their Facebook timeline or to send messages to other Facebook users. Further information about the Facebook SDK within iOS can be found here: https://developers.facebook.com/docs/ios. For Android, please refer to: https://developers.facebook.com/docs/android. The legal basis for the storage of this data is Art. 6 paragraph 1 sentence 1 letter b GDPR. Facebook App Events: We use the Facebook App Events service though the Facebook SDK to track the reach of our advertising campaigns and the use of the Facebook SDK. Facebook merely provides us with an aggregated analysis of user behavior with our app. We have no influence beyond that on the information that will be processed through App Events by Facebook. Facebook is certified under the Privacy Shield Agreement and thus guarantees compliance with European data protection legislation (https://www.privacyshield.gov/participant?id=a2zt0000000GnywAAC&amp;status=Active). The legal basis for this processing is Art. 6 paragraph 1 sentence 1 letter f GDPR. In our app settings, you can opt out of using App Events for these purposes.</span></p>
+<p><span style="font-weight: 400;">We use the &ldquo;Custom Audience pixel&rdquo; of Facebook Inc., 1601 S. California Ave, Palo Alto, CA 94304, USA (&ldquo;Facebook&rdquo;) on our website. With its help, we can keep track of what users do after they see or click on a Facebook advertisement. This enables us to monitor the effectiveness of Facebook ads for purposes of statistics and market research. Data collected in this way is anonymous to us, which means we cannot see the personal data of individual users. However, this data is saved and processed by Facebook. Facebook can connect this data with your Facebook account and use it for its own advertising purposes, in accordance with Facebook&rsquo;s Data Policy which can be found at https://www.facebook.com/about/privacy/. You can allow Facebook and its partners to place ads on and outside of Facebook. A cookie can also be saved on your device for these purposes. Please click here if you would like to withdraw your consent </span><a href="https://www.facebook.com/settings/?tab=ads#_=_"><span style="font-weight: 400;">https://www.facebook.com/settings/?tab=ads#_=_</span></a></p>
+<h3>6. GOOGLE</h3>
+<p><span style="font-weight: 400;">On our app we use the marketing and re-marketing services of Google Inc. (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA; &ldquo;Google&rdquo;). These services allow us to display advertisements in a more targeted manner in order to present advertisements of interest to users. Through remarketing ads and products are displayed to users relating to an interest established by activity on other apps within the Google Network. For these purposes, a code is used by Google when our app is accessed and what are referred to as (re)marketing tags are incorporated into the app. With their help, an individual cookie, i.e. a small file, is stored on the user&rsquo;s device (comparable technologies may also be used instead of cookies). Cookies can be set by various domains, including google.com, doubleclick.net, invitemedia.com, admeld.com, googlesyndication.com or googleadservices.com. This file records which apps users have visited, which content they are interested in and which offers have been used. In addition, technical information about the browser and operating system, referring apps, the length of the visit as well as any additional data about the use of the online products and services are stored. The IP address of users is also recorded, although we would like inform you that within the framework of Google Analytics, IP addresses within Member States of the European Union or in other contracting states to the Agreement on the European Economic Area are truncated. All user data will only be processed as pseudonymous data. Google does not store any names or e-mail addresses. All displayed ads are therefore not displayed specifically for a person, but for the owner of the cookie. This information is collected by Google and transmitted to and stored by servers in the USA. One of the Google marketing services we use is the online advertising program Google AdWords. In the case of Google AdWords, each AdWords customer receives a different conversion cookie. Cookies can therefore not be tracked through the apps of AdWords customers. The information collected by the cookie is used to generate conversion statistics for AdWords customers who have opted for conversion tracking. AdWords customers see the total number of users who clicked on their ad and were redirected to a page with a conversion tracking tag. However, they will not receive any information that personally identifies users. We may include third-party advertisements based on the Google Marketing Service called DoubleClick. DoubleClick uses cookies to enable Google and its partner apps to place ads based on users&rsquo; visits to this app or other apps on the Internet. Google services make use of Google&rsquo;s Tag Manager. For more information about Google&rsquo;s use of data for marketing purposes, please see the summary page: https://www.google.com/policies/technologies/ads, Google&rsquo;s privacy policy is available at https://www.google.com/policies/privacy The legal basis for the use of this service is Article Art. 6 paragraph 1 sentence 1 letter f GDPR. If you wish to object to interest-based advertising by Google marketing services, you can do so using the settings and opt-out options provided by Google: http://www.google.com/ads/preferences. Google is certified under the Privacy Shield Agreement and thus guarantees compliance with European data protection legislation (https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&amp;status=Active).</span></p>
+<p><span style="font-weight: 400;">Our website uses Google Analytics, a web analysis service of Google, Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043 USA, www.google.com (&ldquo;Google Analytics&rdquo; or &ldquo;Google&rdquo;). Google Analytics employs cookies that are stored to your computer in order to facilitate an analysis of your use of the site. The information generated by these cookies, such as time, place and frequency of your visits to our site, including your IP address, is transmitted to Google&rsquo;s location in the US and stored there. In using Google Analytics our website employs the extension &ldquo;anonymizeIp&rdquo;. In doing so, Google abbreviates and thereby anonymizes your IP address before transferring it from EU/EEA member states. Google uses this information to analyze your use of our site, to compile reports for us on internet activity and to provide other services relating to our website. Google may also transfer this information to third parties where required to do so by law or where such third parties process this data on Google&rsquo;s behalf. Google states that it will in never associate your IP address with other data held by Google. You can prevent cookies from being installed by adjusting the settings on your browser software accordingly as noted elsewhere in this Privacy Policy. You should be aware, however, that by doing so you may not be able to make full use of all the functions of our website. Google Analytics also offers a deactivation add-on for most current browsers that provides you with more control over what data Google can collect on websites you access. The add-on tells the JavaScript (ga.js) used by Google Analytics not to transmit any information about website visits to Google Analytics. However, the browser deactivation add-on offered by Google Analytics does not prevent information from being transmitted to us or to other web analysis services we may engage. Google Analytics also uses electronic images known as web beacons (sometimes called single pixel gifs) and are used along with cookies to compile aggregated statistics to analyze how our site is used. You can find additional information on how to install the browser add-on referenced above at the following link: https://tools.google.com/dlpage/gaoptout?hl=en. For the cases in which personal data is transferred to the US, Google has self-certified pursuant to the EU-US Privacy Shield (https://www.privacyshield.gov/EU-US-Framework). 12.8 Google Tag Manager (GTM) Google Tag Manager (GTM&rdquo;) is a tag management system to manage JavaScript and HTML tags used for tracking and analytics on websites. Tags are small code elements that, among other things, are used to measure traffic and visitor behaviour: to understand the effect of online advertising and social channels; to set up remarketing and orientation towards target groups; and to test and optimize websites. GTM makes it easier for us to integrate and manage our tags.</span></p>
+<h3>7. HOW WE PROTECT INFORMATION</h3>
+<p><span style="font-weight: 400;">We implement reasonable precautions and follow industry best practices in order to protect your Personal Information and ensure that such Personal Information is not accessed, disclosed, altered or destroyed. However, these measures do not guarantee that your information will not be accessed, disclosed, altered or destroyed by breach of such precautions. By using our Service, you acknowledge that you understand and agree to assume these risks.</span></p>
+<h3>8. YOUR RIGHTS REGARDING THE USE OF YOUR PERSONAL INFORMATION</h3>
+<p><span style="font-weight: 400;">You have the right at any time to prevent us from contacting you for marketing purposes. When we send a promotional communication to a user via Weebly, the user can opt out of further promotional communications by following the unsubscribe instructions provided in each promotional e-mail. Please note that notwithstanding the promotional preferences you indicate by either unsubscribing or opting out in the Settings section of the Site, we may continue to send you administrative emails including, for example, periodic updates to our Privacy Policy.</span></p>
+<h3>9. AMAZON</h3>
+<p><span style="font-weight: 400;">Our Service is hosted by Hostwinds, Inc. Hostwinds provides us with the online hosting solution that allows us to provide the Service to you. Your information, including Personal Information, may be stored through Hostwinds&rsquo;s servers. By using the Service, you consent to Hostwinds&rsquo;s collection, disclosure, storage, and use of your Personal Information in accordance with Hostwinds&rsquo; privacy policy available at </span><a href="https://www.hostwinds.com/legal/privacy"><span style="font-weight: 400;">https://www.hostwinds.com/legal/privacy</span></a><span style="font-weight: 400;">.</span></p>
+<h3>10. LINKS TO OTHER WEBSITES</h3>
+<p><span style="font-weight: 400;">As part of the Service, we may provide links to or compatibility with other websites or applications. However, we are not responsible for the privacy practices employed by those websites or the information or content they contain. This Privacy Policy applies solely to information collected by us through the Service. Therefore, this Privacy Policy does not apply to your use of a third-party website accessed by selecting a link via our Service. To the extent that you access or use the Service through or on another website or application, then the privacy policy of that other website or application will apply to your access or use of that site or application. We encourage our users to read the privacy statements of other websites before proceeding to use them.</span></p>
+<h3>11. AGE OF CONSENT</h3>
+<p><span style="font-weight: 400;">By using the Service, you represent that you are at least 18 years of age or have the legal age in your country.</span></p>
+<h3>12. CHANGES TO OUR PRIVACY POLICY</h3>
+<p><span style="font-weight: 400;">The Company reserves the right to change this Privacy Policy and our Terms of Use at any time. If we decide to change this Privacy Policy, we will post these changes on this page so that you are always aware of what information we collect, how we use it, and under what circumstances we disclose it. Any such modifications become effective upon your continued access to and/or use of the Service five (5) days after we first post the changes on the website or otherwise provide you with notice of such modifications. It is your sole responsibility to check this website from time to time to view any such changes to the terms of this Privacy Policy. If you do not agree to any changes, if and when such changes may be made to this Privacy Policy, you must cease access to this website. If you have provided your email address to us, you give us permission to email you for the purpose of notification as described in this Privacy Policy.</span></p>
+<h3>13. MERGER OR ACQUISITION</h3>
+<p><span style="font-weight: 400;">In the event we undergo a business transaction such as a merger, acquisition by another company, or sale of all or a portion of our assets, your Personal Information may be among the assets transferred. You acknowledge and consent that such transfers may occur and are permitted by this Privacy Policy, and that any acquirer of our assets may continue to process your Personal Information as set forth in this Privacy Policy. If our information practices change at any time in the future, we will post the policy changes here so that you may opt out of the new information practices. We suggest that you check this Privacy Policy periodically if you are concerned about how your information is used.</span></p>
+<h3>14. EMAIL COMMUNICATIONS &amp; OPTING OUT</h3>
+<p><span style="font-weight: 400;">We will send you Service-related announcements on occasions when it is necessary to do so. For instance, if our Service is temporarily suspended for maintenance, or a new enhancement is released, which will affect the way you use our Service, we might send you an email. Generally, you may not opt-out of these communications, which are not promotional in nature. Based upon the Personal Information that you provide us, we may communicate with you in response to your inquiries to provide the services you request and to manage your account. We will communicate with you by email or telephone, in accordance with your wishes. We may also use your Personal Information to send you updates and other promotional communications. If you no longer wish to receive these email updates, you may opt-out of receiving them by following the instructions included in each update or communication.</span></p>
+<h3>15. CONTACT US &amp; WITHDRAWING CONSENT</h3>
+<p><span style="font-weight: 400;">If you have any questions regarding this Privacy Policy or the practices of this Site, or wish to withdraw your consent for the continued collection, use or disclosure of your Personal Information, please contact us by sending an email to hello@provisn.com</span></p>
+
+
+                </div>
+            </div>
+        </div>
+
+
+		<a data-scroll href="#header" id="scroll-to-top"><i class="arrow_carrot-up"></i></a>
+
+        <div class="modal fade bs-contact-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ContactFormModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title white" id="ContactFormModalLabel">Contact us.</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- CONTACT -->
+                        <section id="contact" class="contact_section padding">
+                           <div class="container">
+
+                                   <div class="register-form2">
+                                       <form method="post" action="#" class="subscribe_form2">
+                                           <!--
+                                           <input type=“name” name=“name” id=“name” class=“form_input” placeholder=“Name”>
+                                           <input type=“email” name=“email” id=“subs-email” class=“form_input” placeholder=“Email”>
+                                           <textarea rows=“4" cols=“50” placeholder=“Message..” class=‘textarea_styled’></textarea>
+                                           -->
+                                           {% csrf_token %}
+                                           {{ MTAform.as_p }}
+                                           <div class="button-contact">
+                                           <button name="MTAform_Button" type="submit" class="submit">Send message</button></div>
+                                           <div id="subscribe-result">
+                                               <p class="subscription-success"></p>
+                                               <p class="subscription-error"></p>
+                                           </div>
+                                       </form>
+                                   </div><!-- Section Heading -->
+                               </div>
+                           </div>
+                        </section><!-- CONTACT -->
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+
+		<!-- jQuery Lib -->
+		<script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+		<!-- Tether JS -->
+		<script src="{% static 'js/vendor/tether.min.js' %}"></script>
+		<!-- Bootstrap JS -->
+		<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+		<!-- waypoints js -->
+		<script src="{% static 'js/vendor/jquery.waypoints.v2.0.3.min.js' %}"></script>
+		<!-- Slicknav JS -->
+		<script src="{% static 'js/vendor/jquery.slicknav.min.js' %}"></script>
+		<!-- OWL-Carousel JS -->
+		<script src="{% static 'js/vendor/owl.carousel.min.js' %}"></script>
+		<!-- swiper JS -->
+	    <script src="{% static 'js/vendor/swiper.min.js' %}"></script>
+		<!-- Counterup JS -->
+		<script src="{% static 'js/vendor/jquery.counterup.min.js' %}"></script>
+		<!-- Smooth Scroll JS -->
+		<script src="{% static 'js/vendor/smooth-scroll.min.js' %}"></script>
+		<!-- vendor JS -->
+		<script src="{% static 'js/vendor/venobox.min.js' %}"></script>
+		<!-- Ajaxchimp JS -->
+		<script src="{% static 'js/vendor/jquery.ajaxchimp.min.js' %}"></script>
+		<!-- Particle JS -->
+        <script src="{% static 'js/vendor/particles.min.js' %}"></script>
+		<!-- App JS -->
+        <script src="{% static 'js/vendor/app.js' %}"></script>
+		<!-- Wow JS -->
+		<script src="{% static 'js/vendor/wow.min.js' %}"></script>
+		<!-- Main JS -->
+		<script src="{% static 'js/main.js' %}"></script>
+
+        <script src="https://kit.fontawesome.com/3eaab551dc.js"></script>
+
+       <div class="col-md-3 col-sm-6 xs-padding li-footer">
+                <ul>
+                    <li> <a href="{% url 'frontpage_terms' %}"> Terms of service</a></li>
+                    <li><a href="#"  data-toggle="modal" data-target=".bs-contact-modal-lg">Contact</a></li>
+                    <li><a href="{% url 'frontpage_privacy' %}"> Privacy policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row footer-socials" style="margin-top: 30px;">
+            <div class="col-lg-12 md-12 sm-12">
+
+                Follow our channels <a href="https://t.me/joinchat/HaeSp1VPMcRho7xIHAow0Q"> <img src="{% static 'img/telegram.png' %}" alt="Provisn" style="   width: 30px; margin-right: 10px; margin-left: 30px "> </a><a href="https://www.facebook.com/provisnlive/"> <img src="{% static 'img/fb.png' %}" alt="Provisn" style="   width: 33px; margin-right: 10px"></a> <a href="https://www.instagram.com/provisn/"> <img src="{% static 'img/insta.png' %}" alt="Provisn" style="   width: 30px; margin-right: 10px"></a> <a href="https://twitter.com/pro_visn"> <img src="{% static 'img/twitter.png' %}" alt="Provisn" style="   width: 30px;"></a>
+
+            </div>
+
+    </di
+
+
+    </body>
+</html>
+
+
+

@@ -1,0 +1,470 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<div class="row top-ticker">
+    <div class="col-12">
+        <div class="page-title-box" style="z-index:2; overflow: hidden">
+            <div style="" class='' id="market-ticker">
+            </div>
+        </div>
+    </div>
+</div>
+<section class="main-section">
+    <div class="content-page" id="dashboardContainer">
+        <!-- end page title -->
+        <div class="row">
+            <div class="mb-3 col-lg-8 col-md-12 rounded" id="beams-and-market-overview-container">
+                <div class="dashboard-bg rounded">
+                    {% if beams %}
+                    <div class="dashboardContainer dashboardBlock rounded">
+                        <h4 class="dashboardTitle">
+                            <a class="dashboardHeader title-font-size" href="{% url 'user_beams' %}">
+                                Latest Beams
+                            </a>
+                        </h4>
+                        <div class="clearfix dashboard-block-card-body row display-flex">
+                            {% for beam in beams %}
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6" style="margin-bottom: 24px">
+                                {% if beam.pair %}
+                                <h4 class="w-100 dashboard-beams-content-header {{ beam.color_class }}">
+                                    {{ beam.pair }}
+                                </h4>
+                                {% endif %}
+                                <div class="dashboardblock-entry">
+                                    <div class="dashboard-beams-content">
+                                        {% if beam.entry %}
+                                        <div class="w-100"
+                                            style="border-bottom: 1px solid #303030; padding-bottom: 7px;">
+                                            Entry:
+                                            <span class="float-right no-list beam-data">{{ beam.entry|linebreaksbr|safe }}</span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if beam.targets %}
+                                        <div class="w-100 target-beam"
+                                            style="border-bottom: 1px solid #303030; margin-top:7px; padding-bottom: 7px;">
+                                            Targets:
+                                            <span class="float-right no-list beam-data">{{ beam.targets|linebreaksbr|safe }}</span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if beam.stop_loss %}
+                                        <div class="w-100" style=" margin-top:7px; ">
+                                            Stop Loss:
+                                            <span class="float-right no-list beam-data">{{ beam.stop_loss|linebreaksbr|safe }}</span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="footer-beam">
+                                        <div class="beam-exchange">{{ beam.exchange }}</div>
+                                        <div class="date-beam"> {{ beam.published_date|naturaltime}} </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="market_overview">
+                        <h4 class="dashboardTitle title-font-size">
+                            Market Overview
+                        </h4>
+                        <div class="clearfix dashboard-block-card-body">
+                            <ul class="nav nav-pills row" id="pills-tab" role="tablist">
+                                {% if plutus_ai %}
+                                <li class="nav-item col-4 text-center">
+                                    <a class="market-overview-tab-link nav-link active" id="pills-ai_signals-tab"
+                                        data-toggle="pill" href="#pills-ai_signals" role="tab"
+                                        aria-controls="pills-ai_signals" aria-selected="true">A.I. Signal Calls</a>
+                                </li>
+                                {% endif %}
+                                {% if technical_analysis %}
+                                <li class="nav-item col-4 text-center">
+                                    <a class="market-overview-tab-link nav-link" id="pills-ta-tab" data-toggle="pill"
+                                        href="#pills-ta" role="tab" aria-controls="pills-ta"
+                                        aria-selected="false">Technical Analysis</a>
+                                </li>
+                                {% endif %}
+                                {% if token_watchlist %}
+                                <li class="nav-item col-4 text-center">
+                                    <a class="market-overview-tab-link nav-link" id="pills-ts-tab" data-toggle="pill"
+                                        href="#pills-ts" role="tab" aria-controls="pills-ts" aria-selected="false">Token
+                                        Spotlight</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                                {% if plutus_ai %}
+                                <div class="tab-pane fade show active" id="pills-ai_signals" role="tabpanel"
+                                    aria-labelledby="pills-ai_signals-tab">
+                                    <div class="row display-flex">
+                                        {% for ai in plutus_ai %}
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="card-box-ai-db box-shadow rounded">
+                                                <h3 class="float-right">
+                                                    {% if ai.coin.coin_icon %}
+                                                    <img class="cryptocurrency-icons-content-list-page" src="{{ ai.coin.coin_icon.url }}" />
+                                                    {% endif %}
+                                                    {{ ai.coin.short_name }}
+                                                </h3>
+                                                <div class="sc-gauge">
+                                                    <div class="sc-background">
+                                                        <div style="transform:rotate({{ ai.get_percentage_value_in_deg }}deg); transform-origin:top center;"
+                                                            class="sc-percentage {{ ai.get_gauge_class }}"></div>
+                                                        <div class="sc-mask"></div>
+                                                        <span class="sc-value">{{ ai.get_percentage_value }}%</span>
+                                                    </div>
+                                                    <span class="sc-min">0</span>
+                                                    <span class="sc-max">100</span>
+                                                </div>
+                                                <div class="text-muted mb-0 ai-text">
+                                                    {{ ai.get_text_field|safe }}
+                                                </div>
+                                                <small class="published">
+                                                    {{ ai.published_date|naturaltime }}
+                                                </small>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if technical_analysis %}
+                                <div class="tab-pane fade" id="pills-ta" role="tabpanel" aria-labelledby="pills-ta-tab">
+                                    {% if item.is_ta_scraped %}
+                                        <a href="{{ item.url }}" target="_blank">
+                                    {% endif %}
+                                    <!-- <div class="row p15reml p05remr"> -->
+                                    <div class="row no-margin">
+                                        {% for ta in technical_analysis %}
+                                        <div class="col-md-4 col-lg-4 grid-item borderR">
+                                            {% if ta.title %}<input type="hidden" class="ta-content" value="{{ ta.text }}">{% endif %}
+                                            <a target="_blank" href="{% if ta.is_ta_scraped %}{{ ta.url }}{%else%}#{%endif%}" style="width: 100%;" {% if not ta.is_ta_scraped %}data-toggle="modal" data-target=".bs-ta-modal-lg"{%endif%}>
+                                                <div class="ta-diagram">
+                                                    <img src="{{ ta.image_url }}" style="height:200px;" class="w-100">
+                                                </div>
+                                                <div class="card-news {% if ta.news_image %}card-news-radius-img{%endif%} content-list-block" style="margin-bottom: 0px; background-color: #252525">
+                                                    <h3 class="float-right">
+                                                        {% if ta.coin.coin_icon %}
+                                                            <img class="cryptocurrency-icons-content-list-page" src="{{ ta.coin.coin_icon.url }}"/>
+                                                        {% endif %}
+                                                        {{ ta.coin.short_name }}
+                                                    </h3>
+                                                    <h1 class="truncate-news line-clamp title">{% if ta.title %} {{ ta.title }} {% endif %}</h1>
+                                                    <div class="link-preview-wrapper d-none">
+                                                        {{ ta.text|safe|truncatechars:350 }}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% if item.is_ta_scraped %}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                                {% if token_watchlist %}
+                                <div class="tab-pane fade ts-dashboard-block rounded tokenwatch" id="pills-ts"
+                                    role="tabpanel" aria-labelledby="pills-ts-tab">
+                                    {% for tw in token_watchlist %}
+                                    <a href="#">
+                                        <div class="row content-list-block-tw no-margin" style="justify-content: center; margin-top: 10px !important;">
+                                            <div class="d-none cp_id">{{ tw.coin.coinpaprika_id }}</div>
+                                            <div class="col-2 bitcoin-image">
+                                                <div class="col-2 tw-image" style="width: fit-content;">
+                                                    <img class="" src="{% if tw.coin_icon %}{{ tw.coin_icon.url }}{% endif %}" style="width: fit-content; height: fit-content; max-width: 75px; max-height: 75px;">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <h3 class="">
+                                                    <!-- Token Name -->
+                                                    {{ tw.coin.name }}
+                                                    <small>
+                                                        <!-- token Short name -->
+                                                        {{ tw.coin.short_name }}
+                                                    </small>
+                                                </h3>
+                                                <div class="">
+                                                    <p></p>
+                                                    <div class="market_cap">
+                                                        <h5>Market Cap</h5>
+                                                        <p>Load...</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <h3><br /></h3>
+                                                <p></p>
+                                                <div class="24h_volume">
+                                                    <h4>24h Volume</h4>
+                                                    <p>
+                                                        Loading...
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <h3><br /></h3>
+                                                <p></p>
+                                                <div class="circ_supply">
+                                                    <h4>Circ. Supply</h4>
+                                                    <p>
+                                                        Loading...
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-2 small-height-block">
+                                                <h3><br /></h3>
+                                                <p></p>
+                                                <div class="24h_change">
+                                                    <h4>Change 24h</h4>
+                                                    <p>
+                                                        Loading...
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-2 small-height-block">
+                                                <h3><br /></h3>
+                                                <p></p>
+                                                <div class="7d_change">
+                                                    <h4>Change 7d</h4>
+                                                    <p>
+                                                        Loading...
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="offset-2 col-10 left-margin">
+                                                <div class="tw-description">
+                                                    Loading...
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3 col-lg-4 col-md-12 grid-item calendar-item">
+                <div class="progress-bar-area" style="height: 158px;">
+                    <div class="dashboardContainer col-12 dashboardBlock card rounded meter-block" style="height: 100%; margin-bottom: 0px">
+                        <div class="padding-text-meter">
+                            <span class="title-meter title-font-size">Daily fear and greed</span>
+                            <span style="float: right; margin-top: 5px;">{{ fear_and_greed.update_time|naturaltime }}</span>
+                        </div>
+                        <div class="meter">
+                            <span style="width: {{ fear_and_greed.value }}%;"> {{ fear_and_greed.value }}% </span>
+                        </div>
+                        <div class="padding-text-meter" style="font-size: 12px;">
+                            <span>Market is currently trending <u>{{ fear_and_greed.value_classification }}</u></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="calendar-area">
+                    <div class="dashboardContainer dashboardBlock card rounded calendar-block">
+                        <div class="clearfix dashboard-block-card-body text-center p-0">
+                            <p></p>
+                            <h3 class="title-font-size title_current_month"><b class="pt-1">{{ current_month_name }}</b></h3>
+                            <table id="dashboard-calendar" class="mx-auto">
+                            </table>
+                        </div>
+                        <div id="dashboard-events-info" class="col-12">
+                            <hr />
+                        </div>
+                        <div class="type-event-area" class="col-12">
+                            <hr />
+                            <div class="type-event">
+                                <i class="fa fa-circle circle-icon color-brown"></i>
+                                <div><span>Coin event</span></div>
+                                <i class="fa fa-circle circle-icon color-blue"></i>
+                                <div><span>Location based event</span></div>
+                                <i class="fa fa-circle circle-icon color-green"></i>
+                                <div><span>Provisn exclusive</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if news %}
+            <div class="mb-3 col-12 lg-8 grid-item ml-2 pl-2 pr-2">
+                <div class="row col-12 dashboard-bg rounded">
+                    <h4 class="col-12 dashboardTitle rounded">
+                        <a class="dashboardHeader title-font-size" href="{% url 'user_news' %}">
+                            News
+                        </a>
+                    </h4>
+                    {% for new in news %}
+                    {% if not new.hidden %}
+                    <a target="_blank" href="{{ new.get_url }}">
+                        <div class="col-lg-3 col-md-4 grid-item borderR" style="padding: 18px 18px 0px 18px;">
+                            {% if new.news_image %}
+                            <img class="card-img-top2 img-fluid" src="{{ new.news_image.url }}" alt="{{ new.get_title }}">
+                            {% else %}
+                            <div class="image-preview-parent">
+                                <img class="card-img-top2 img-fuild preview-image-container" src="{{ new.image_url }}">
+                                <h3 class="preview-image-title "></h3>
+                                <div class="preview-image-description">
+                                    <p></p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="card-news greyish box-shadow {% if new.news_image %}card-news-radius-img{%endif%} content-list-block">
+                                <h3 class="float-right">
+                                    {% if new.coin.coin_icon %}
+                                    <img class="cryptocurrency-icons-content-list-page"
+                                        src="{{ new.coin.coin_icon.url }}" />
+                                    {% endif %}
+                                    {{ new.coin.short_name }}
+                                </h3>
+                                <a target="_blank" href="{{ new.get_url }}">
+                                    <h1 class="truncate-news line-clamp">{% if new.title %} {{ new.get_title }} {% endif %}
+                                    </h1>
+                                </a>
+                                <div class="link-preview-wrapper d-none">
+                                    {{ new.text|safe|truncatechars:350 }}
+                            </a>
+                        </div>
+
+                <p class="published">
+                    <i class="mdi mdi-calendar-month-outline"></i>
+                    {{ new.published_date|naturaltime }}
+
+                    <!-- <span class="tag-field">
+                                            {% for tag in new.tags.all %}
+
+                                                <a href="{% url 'search' %}?q={{ tag }}" class="badge tag no-border">
+                                                    {{ tag }}
+                                                </a>
+                                            {% endfor %}
+                                        </span> --!>
+                                    </p>
+                                    {% if new.coin.coinmarketcap_url %}
+                                    <a href="{{ new.coin.coinmarketcap_url }}">
+                                        <button type="button" class="btn btn-outline-primary waves-effect waves-light width-md">View on Coinmarketcap</button>
+                                    </a>
+                                    {% endif %}
+                                    <!-- Simple card -->
+            </div>
+        </div><!-- end col -->
+        {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+    {% endif %}
+
+    <div class="col-12 grid-item" id="MarketCapList">
+        <div class="dashboard-bg rounded">
+            <h4 class="dashboardTitle rounded title-font-size">
+                Market
+            </h4>
+            <!-- <div class="page-title-box" style=" overflow: hidden">
+                <div style="" class='' id="market-overview-ticker">
+                </div>
+            </div> -->
+            <div id="marketCapWidgetWrapper" class="border" style="">
+                <div>                    
+                    <table style="width:100%;" id="market-view-table" class="table">
+                        <tr class="">
+                            <th class="col text-left">Coin Name</th>
+                            <th class="col text-right"></th>
+                            <th class="col text-left" style="min-width: 150px">Price</th>
+                            <th class="col text-left" style="min-width: 150px">Market Cap</th>
+                            <th class="col text-left" style="min-width: 80px">24h</th>
+                            <th class="col text-left" style="min-width: 80px">7d</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <style>
+                .dark {
+                    background-color: #fff;
+                }
+            </style>
+        </div>
+    </div>
+    </div>
+    </div>
+    <p><br /></p>
+
+
+    <div class="modal fade bs-ta-modal-lg" tabindex="-1" role="dialog" aria-labelledby="TAFormModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="max-width:90%; width:90%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <div class="" style="display: flex;"> -->
+                        <h4 class="modal-title white" id="TAFormModalLabel"></h4>
+                        <span style="float: right; margin-left: auto;"><i class="fa fa-clock" style="margin-right: 10px;"></i>2 hours ago</span>
+                    <!-- </div> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <!-- CONTACT -->
+                    <section id="ta" class="ta_section padding">
+                        <div>
+                            <div class="chart-coin w-100">
+                                <img class="diagram-frame w-100">
+                            </div>
+                            <div class="description">
+                                <span class="description-content"></span>
+                            </div>
+                        </div>
+                    </section><!-- CONTACT -->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        $(window).on('load', function () {
+            makeImagesClickable();
+        });
+        calendar_dashboard(
+            {{ days_current_month }},
+            {{ current_day }},
+            '{{ current_month_name }}'
+        );
+        dashboard_market_overview();
+        get_currency_info();
+        update_currency_values();
+        window.setInterval(function () {
+            update_dashboard_market_overview();
+        }, 15000);
+
+        /* Re- Enable later
+        $('.bs-ta-modal-lg').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var title = button.find(".title").html();
+            var content = $(".ta-content").val();
+            console.log(button.find("img").attr("src"));
+            var modal = $(this)
+            modal.find('#TAFormModalLabel').text(title);
+            // modal.find(".chart-coin").append(button.find("#diagram_embed").val());
+            modal.find(".diagram-frame").attr("src", button.find("img").attr("src"))
+            modal.find(".description-content").html(content);
+        });
+        */
+    });
+</script>
+<script>
+    $(function() {
+        $(".meter > span").each(function() {
+            $(this)
+                .data("origWidth", $(this).width())
+                .width(0)
+                .animate({
+                    width: $(this).data("origWidth")
+                }, 1200);
+        });
+    });
+</script>
+
+{% endblock %}

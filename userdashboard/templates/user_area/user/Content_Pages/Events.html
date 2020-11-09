@@ -1,0 +1,50 @@
+{% extends 'user_area/base.html' %}
+{% block content %}
+
+<div class="content-page">
+    <!-- Header -->
+    <div class="content">
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box mb30">
+                        <h3 class="page-title">{{ pagetitle }} - {{ subHeader }} </h3>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+            <!-- Actual Content -->
+            <div class="row" style="padding: 0 ; margin: 0; min-width: 540px;">
+                {% if PageRefAddContent == 'NewBlockchainEvents' %}
+                <script type="application/javascript">
+                    function resizeIFrameToFitContent(iFrame) {
+                        iFrame.width = iFrame.contentWindow.document.body.scrollWidth;
+                        iFrame.height = iFrame.contentWindow.document.body.scrollHeight + 30;
+                    }
+                    window.addEventListener('DOMContentLoaded', function (e) {
+                        var iFrame = document.getElementById('calendar_frame');
+                        resizeIFrameToFitContent(iFrame);
+                    });
+                </script>
+                <div class="card-box w-100">
+                    <iframe id="calendar_frame" class="card-box"
+                            style="box-shadow:none;padding: 0 0 0 0; width: -webkit-fill-available; border:none; width: -moz-available;"
+                            src="{% url 'cal:calendar' %}">
+                    </iframe>
+                </div>
+                {% endif %}
+                {% for c in items %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        var iFrame = document.getElementById('calendar_frame');
+        resizeIFrameToFitContent(iFrame);
+    };
+</script>
+{% endblock %}

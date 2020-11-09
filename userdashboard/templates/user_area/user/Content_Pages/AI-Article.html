@@ -1,0 +1,72 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+                        
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h3 class="page-title">AI Signal call</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!-- Start Content -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-box">
+                        <h1>{% if post.title %} {{ post.title }} {% endif %}</h1>
+                        <p class="text-muted mb-0">
+                                    
+                            {{ post.get_text_field|safe }}
+
+                        </p>
+
+                        <div class="sc-gauge">
+                            <div class="sc-background">
+                                <div class="sc-percentage {{ GaugeClass }}"></div>
+                                <div class="sc-mask"></div>
+                                <span class="sc-value">{{ GaugePercent }}%</span>
+                            </div>
+                            <span class="sc-min">0</span>
+                            <span class="sc-max">100</span>
+                        </div>
+                                    
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end card-box-->
+
+                </div>
+
+                    
+            </div>
+            <!-- end card-box-->
+
+
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+</div>
+<style type="text/css">
+
+            .sc-percentage { transform:rotate({{ GaugeDegree }}deg); transform-origin:top center; }
+
+</style>
+{% endblock %}

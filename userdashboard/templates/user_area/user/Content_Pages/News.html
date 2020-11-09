@@ -1,0 +1,142 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h3 class="page-title">
+                            {{ pagetitle }}
+                            {% if user.is_superuser or user.is_staff %}
+                                <a href="{% url 'NewBN' %}"><i class="d-none mdi mdi-pencil-plus-outline"></i></a>
+                                <a href="{% url 'DraftsBN' %}" class="d-none btn btn-primary"><b>Drafts </b></a>
+                            {% endif %}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+            <div class="row">
+                <!--
+                <nav class="col-12">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="news-all-tab" data-toggle="tab" href="#news-all" role="tab" aria-controls="nav-home" aria-selected="true">All News</a>
+                        <a class="nav-item nav-link" id="news-coin-desk-tab" data-toggle="tab" href="#news-coin-desk" role="tab" aria-controls="news-coin-desk" aria-selected="false">Coin Desk</a>
+                        <a class="nav-item nav-link" id="news-daily-hodl-tab" data-toggle="tab" href="#news-daily-hodl" role="tab" aria-controls="news-daily-hodl" aria-selected="false">Daily HODL</a>
+                        <a class="nav-item nav-link" id="news-crypt-news-and-signals" data-toggle="tab" href="#news-crypto-news-and-signals" role="tab" aria-controls="news-crypto-news-and-signals" aria-selected="false">Crypto News and Signals</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Other News</a>
+                    </div>
+                </nav>-->
+                <div class="tab-content news-padding col-12" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="news-all" role="tabpanel" aria-labelledby="news-all-tab">
+                        <div class="row grid">
+                            <div class="grid-sizer"></div>
+                        {% for item in items %}
+                            {% if not item.hidden %}
+                                <div class="col-md-4 col-lg-3 grid-item borderR">
+                                    {% if item.news_image %}
+                                        <img class="card-img-top2 img-fluid" src="{{ item.news_image.url }}" alt="{{ item.title }}">
+                                    {% else %}
+                                        <div class="image-preview-parent">
+                                            <a target="_blank" href="{{ item.get_url }}">
+                                                <img class="card-img-top2 img-fuild preview-image-container" src="{{ item.image_url }}">
+                                                <h3 class="preview-image-title"></h3>
+                                                <div class="preview-image-description">
+                                                    <p></p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                    <div class="card-news {% if item.news_image %}card-news-radius-img{%endif%} content-list-block">
+                                        <h3 class="float-right">
+                                            {% if item.coin.coin_icon %}
+                                            <img class="cryptocurrency-icons-content-list-page" src="{{ item.coin.coin_icon.url }}"/>
+                                            {% endif %}
+                                            {{ item.coin.short_name }}
+                                        </h3>
+                                        <a target="_blank" href="{{ item.get_url }}">
+                                            <h1 class="truncate-news line-clamp">{% if item.title %} {{ item.get_title }} {% endif %}</h1>
+                                        </a>
+                                        <div class="link-preview-wrapper d-none">
+                                            {{ item.text|safe|truncatechars:350 }}
+                                            </a>
+                                        </div>
+                                        <p class="published">
+                                            <i class="mdi mdi-calendar-month-outline"></i>
+                                            {{ item.published_date|naturaltime }}
+                                            <!-- <span class="tag-field">
+                                                {% for tag in item.tags.all %}
+
+                                                    <a href="{% url 'search' %}?q={{ tag }}" class="badge tag">
+                                                        {{ tag }}
+                                                    </a>
+                                                {% endfor %}
+                                            </span> --!>
+                                        </p>
+                                        {% if item.coin.coinmarketcap_url %}
+                                        <a href="{{ item.coin.coinmarketcap_url }}">
+                                            <button type="button" class="btn btn-outline-primary waves-effect waves-light width-md">View on Coinmarketcap</button>
+                                        </a>
+                                        {% endif %}
+                                        <!-- Simple card -->
+                                    </div>
+                                </div><!-- end col -->
+                            {% endif %}
+                        {% endfor %}
+
+                            {% if items.paginator.num_pages > 2 %}
+                            <div class="col-12 margin-auto grid-item" style="height:100px;"><!-- Don't ask why height:100px; without this tag at all, the read more stopped working -->
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        {% if items.has_previous %}
+                                            <a class="page-link" href="?page=1" aria-label="Previous">
+                                                <span aria-hidden="true">‹‹</span>
+                                                <span class="sr-only">First</span>
+                                            </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ items.previous_page_number }}" aria-label="Previous">
+                                            <span aria-hidden="true">Prev</span>
+                                            <span class="sr-only">Prev</span>
+                                        </a>
+                                        {% endif %}
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#">{{ items.number }} of {{ items.paginator.num_pages }}</a>
+                                    </li>
+                                    {% if items.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ items.next_page_number }}" aria-label="Next">
+                                            <span aria-hidden="true">Next</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ items.paginator.num_pages }}" aria-label="Last">
+                                            <span aria-hidden="true">››</span>
+                                            <span class="sr-only">Last</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- container-fluid -->
+</div> <!-- content -->
+{% endblock %}

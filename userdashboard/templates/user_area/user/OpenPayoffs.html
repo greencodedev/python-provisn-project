@@ -1,0 +1,46 @@
+{% extends 'user_area/base.html' %}
+{% block content %}
+<div class="content-page">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">
+                    {{ pagetitle }}
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <table class="w-100">
+            <tr>
+                <th>User</th>
+                <th class="text-right pr-4">Amount to pay off</th>
+                <th class="">Name</th>
+                <th class="">Bank ID</th>
+                <th class="">IBAN</th>
+                <th class="">SWIFT</th>
+                <th class="pl-5">Mark as done</th>
+            </tr>
+            {% for user in pay_off_users %}
+            <form method="POST">
+                {% csrf_token %}
+
+                <tr>
+                    <td>{{ user.user }}</td>
+                    <td class="text-right pr-4">$ {{ user.reftoken.Amount_open_payoff }}</td>
+                    <td>{{ user.payout.Holders_Name }}</td>
+                    <td>{{ user.payout.Bank_Name }}</td>
+                    <td>{{ user.payout.IBAN }}</td>
+                    <td>{{ user.payout.SWIFT }}</td>
+                    <input value="{{ user.user.email }}" name="pay-out" type="hidden">
+                    <td class="pr-5"><button class="ml-5 button_1 btn waves-effect waves-light w-100" type="submit">Mark as Paid Off</button></td>
+                </tr>
+            </form>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+{% endblock %}

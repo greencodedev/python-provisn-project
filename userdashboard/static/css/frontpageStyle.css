@@ -1,0 +1,184 @@
+@font-face {
+    font-family: AktivGrotesk-Bold;
+    src: url("../fonts/AktivGrotesk-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Bold1;
+    src: url("../fonts/AktivGrotesk-Bold1.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Bold2;
+    src: url("../fonts/AktivGrotesk-Bold2.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Bold3;
+    src: url("../fonts/AktivGrotesk-Bold3.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Light;
+    src: url("../fonts/AktivGrotesk-Light.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Light1;
+    src: url("../fonts/AktivGrotesk-Light1.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Light2;
+    src: url("../fonts/AktivGrotesk-Light2.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Light3;
+    src: url("../fonts/AktivGrotesk-Light3.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Medium;
+    src: url("../fonts/AktivGrotesk-Medium.otf") format("opentype");
+}
+@font-face {
+    font-family: AktivGrotesk-Medium1;
+    src: url("../fonts/AktivGrotesk-Medium1.otf") format("opentype");
+}
+@font-face {
+    font-family: Harbour-Bold;
+    src: url("../fonts/Harbour-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: Harbour-Medium;
+    src: url("../fonts/Harbour-Medium.otf") format("opentype");
+}
+
+h1, h2, h3 {
+    font-family: Harbour-Bold;
+}
+
+.btn {
+    font-family: Harbour-Medium;
+}
+
+p, ul li, form .btn {
+    font-family: AktivGrotesk-Medium;
+}
+
+.btn {
+    color:black;
+}
+
+.header-img {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-bottom:50px;
+    min-height:500px;
+}
+
+.frontpage-block-img {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height:400px;
+    position:relative;
+}
+
+@media(min-width:1500px) {
+    .frontpage-block-img {
+
+        min-height:500px;
+    }
+}
+
+@media(min-width:2000px) {
+    .frontpage-block-img {
+
+        min-height:600px;
+    }
+}
+
+.site-header, .header-wrapper, .pricing-box {
+    background-color: rgba(0,0,0, 1);
+}
+
+.header-wrapper {
+    padding-bottom: 50px;
+}
+
+.pricing-box {
+
+}
+
+.vl {
+    border-left: 1px solid #333;
+    height: 25%;
+    display: center;
+    margin: 0;
+    padding: 0;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
+    margin-top:0;
+    margin-bottom:0;
+}
+
+.whitened {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    /* Fallback for web browsers that don't support RGBa */
+    background-color: rgb(255, 255, 255);
+    /* RGBa with 0.6 opacity */
+    background-color: rgba(255, 255, 255, 0.65);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left:0;
+}
+
+.darkened {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    /* Fallback for web browsers that don't support RGBa */
+    background-color: rgb(0, 0, 0);
+    /* RGBa with 0.6 opacity */
+    background-color: rgba(0, 0, 0, 0.75);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left:0;
+}
+
+.darkened div h1, darkened div hr {
+    color: #ffffff !important
+}
+
+.darkened .text-center, .whitened .text-center {
+    position:absolute; height:100%; width:100%;
+    display: table;
+    top:35%;
+}
+
+.header-img {
+    padding: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .header-img {
+        background-size: auto 100%; background-repeat: no-repeat; background-position: center center;
+    }
+}

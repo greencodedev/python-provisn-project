@@ -1,0 +1,195 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h3 class="page-title">
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-margin">
+                <div class="lg-8 dashboard-bg p-4 col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border-top-right-radius: 1rem; border-top-left-radius: 1rem;">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
+                            <h1 class="invite-h1">Invite a friend and get <br>$10 per signup</h1>
+                            <p class="invite-sub">
+                                Know some crypto enthusiasts? Invite them to our platform and receive $10 per signup!
+                                <br>The more you got sign up the more you'll earn. A user is valid once signed up after
+                                the free trial period
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                            {% if user.get_remaining_subscription_time_in_days %}<div class="border text-center ends"
+                                style=" padding: 1rem;">{% else %}<div class="border-red text-center ends"
+                                    style=" padding: 1rem;">{% endif %}
+                                    {% if user.get_remaining_subscription_time_in_days %}
+                                    <!-- <p class="greytext">Your Subscription Ends</p> -->
+                                    <!-- <h2 class="daysleft">{{ time_left }} Days</h2> -->
+                                    <p style="font-size: 20px; margin-top: 1rem;">Money earned - ${{ refobject.Amount_open_payoff }}</p>
+                                    {% else %}
+                                    <h2 class="no-time-left-invite">Subscription ended</h2>
+                                    {% endif %}
+                                </div>
+                                <div onclick="window.open('{% url 'friend_inviter' %}', '_blank', 'location=yes,height=570,width=820,scrollbars=yes,status=yes');"
+                                    class="mx-auto text-center button_1 invitebutton mt-2">
+                                    Invite Friends
+                                </div>
+                                {% if refobject.Amount_open_payoff >= 20 %}
+                                    <div class="mx-auto text-center button_1 invitebutton mt-2">
+                                        <a href="#" data-toggle="modal" data-target=".bs-contact-modal-lg">request payout</a>
+                                    </div>
+                                {% else %}
+                                    <div class="mx-auto text-center button_1 invitebutton mt-2 dark-btn" style="cursor: default;">
+                                        <a href="#" style="cursor: default;">*request payout from $20</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg-8 bg-black pl-4 pr-4 col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 2.4rem !important; border-bottom-right-radius: 1rem; border-bottom-left-radius: 1rem;">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 code-link">
+                                <div class="col-lg-3 col-md-5 col-sm-5 col-xs-3 right-text">
+                                    <span class="float-left font-weight-bold">Your referral Code: </span>
+                                </div>
+                                <div class="col-lg-8 col-md-6 col-sm-6 col-xs-8 ref-block float-left">
+                                    <span id="ref_token" class="">{{ ref_token }}</span>
+                                </div>
+                                <div class="col-1" style="padding: 0px">
+                                    <i class="ref-block-icon dripicons-copy copy" onclick="copyToClipboard(document.getElementById('ref_token'));"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 code-link">
+                                <div class="col-lg-3 col-md-3 col-sm-5 col-xs-3 right-text">
+                                    <span class="float-left font-weight-bold">Link:</span>
+                                </div>
+                                <div class="ref-block col-lg-8 col-md-8 col-sm-6 col-xs-8">
+                                    <span id="ref_link">https://provisn.com/?reftoken={{ ref_token }}</span>
+                                </div>
+                                <div class="col-1" style="padding: 0px">
+                                    <i class="ref-block-icon dripicons-copy copy" onclick="copyToClipboard(document.getElementById('ref_link'));"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg-8 p-4 col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <p>How to invite friends?</p>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 dashboard-bg p-4">
+                                <p class="method-number">1</p>
+                                <div class="invite-content">
+                                    <div class="invite-img">
+                                        <img src="" />
+                                    </div>
+                                    <div class="invite-text">
+                                        <p>Choose friends to give a 30 days free subscription</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 dashboard-bg p-4">
+                                <p class="method-number">2</p>
+                                <div class="invite-content">
+                                    <div class="invite-img">
+                                        <img src="" />
+                                    </div>
+                                    <div class="invite-text">
+                                        <p>Earn $10 per friend as they sign up</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 dashboard-bg p-4">
+                                <p class="method-number">3</p>
+                                <div class="invite-content">
+                                    <div class="invite-img">
+                                        <img src="" />
+                                    </div>
+                                    <div class="invite-text">
+                                        <p>Get pad!</p>
+                                        <span>No credits or discounts, <br/> just real money!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg-8 dashboard-bg p-4 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                        style="border-radius: 1rem;">
+                        <h3 class="activity">Activity<div class="activity-hr"></div>
+                        </h3>
+                        <table class="w-100 mt-3">
+                            <tr>
+                                <th>User</th>
+                                <th>Date signed in</th>
+                                <th>Subscription bought</th>
+                                <th>Money earned</th>
+                            </tr>
+                            {% for item in referral_list %}
+                            <tr>
+                                <td>{{ item.email }}</td>
+                                <td>{{ item.date_joined }}</td>
+                                <td>{{ item.has_subscribed }}</td>
+                                <td>{{ item.free_time_earned|safe }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="lg-8 p-2 mt-3 col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <div class="detailed-rule">
+                            <p>Detailed Rules</p>
+                            <span>
+                                Binance has upgraded our Referral Program! Invite your friends to register and trade on Binance.com, and you and your friends can share up to 40% of the referral commissions from their trading fees.
+                            </span> 
+                            <br />
+                            <span>
+                                Rules: <br/>
+                                Inviters can choose to share a portion of the commissions received from the trading fees of the friends they invite, as s "kickback". Inviters can set the sharing rates as follows: <br />
+                                1. If the inviter's daily average BNB account balance is less than 500 BNB and their base referral rate is 20%, they can choose to share 0%, 5% or 10% with the friends they invite. <br />
+                                2.If the inviter's daily average BNB account balance is 500 BNB or more, their base referral rate is increased to 40%, and they can choose to
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bs-contact-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ContactFormModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title white" id="ContactFormModalLabel">Payout</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- CONTACT -->
+                    <section id="contact" class="contact_section padding">
+                        <div class="container">
+                            <div>
+                                <div class="register-form2">
+                                    <form method="post" action="#" class="subscribe_form2">
+                                        {% csrf_token %}
+                                        {{ payout_form.as_p }}
+                                        <div class="button-contact">
+                                            <button name="MTAform_Button" type="submit" class="submit">Send message</button>
+                                        </div>
+                                    </form>
+                                </div><!-- Section Heading -->
+                            </div>
+                        </div>
+                    </section><!-- CONTACT -->
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    
+    <script>
+
+    </script>
+    {% endblock %}

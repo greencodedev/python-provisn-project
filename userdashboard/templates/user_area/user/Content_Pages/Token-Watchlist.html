@@ -1,0 +1,201 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+<div class="content-page">
+    <div class="content">
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h3 class="page-title">
+							{{ pagetitle }}
+							{% if user.is_superuser or user.is_staff %}
+								<a href="{% url 'NewTW' %}"><i class="mdi mdi-pencil-plus-outline"></i></a>
+								<a href="{% url 'DraftsTW' %}" class="btn btn-primary"><b>Drafts </b></a>
+							{% endif %}
+						</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+			{% for item in items %}
+				<div class="col-md-12 content-list-block-tw">
+					<div class="d-none cp_id">{{ item.coin.coinpaprika_id }}</div>
+					<div class="row">
+						<!-- <div class="col-2 tw-image bitcoin-img">
+							<img class="">
+						</div> -->
+						<div class="col-12 bitcoin-short-info">
+							<div class="row tw-short-info no-margin-side">
+								<div class="col-4 row no-margin coin-title">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 align-center tw-title" style="min-width: 190px; width: 190px;">
+										<div class="col-2 tw-image bitcoin-img tw-watch">
+											<img class="coin-img" src="{% if item.coin_icon %}{{ item.coin_icon.url }}{% endif %}">
+										</div>
+										{% if user.is_superuser or user.is_staff %}
+											<a href='{% url "DetailsTW" pk=item.pk %}'>
+										{% endif %}
+										<h3 class=""><!-- Token Name -->
+											<span id="token-name" style="margin-left: 20px;">{{ item.title }}</span>
+											<sup><span class="short-name sup-text">{{ item.coin.name }}</span></sup>
+										</h3>
+										{% if user.is_superuser or user.is_staff %}
+											</a>
+										{% endif %}
+									</div>
+									<div class="align-center tw-content" style="display: inline-flex; min-width: 150px; width: 150px;">
+										<!-- <h5>Current</h5> -->
+										<div class="current_value">
+											<span>Loading...</span>
+										</div>
+										<div class="ranking">#<span class="rank_container"></span></div>
+									</div>
+								</div>
+								<div class="col-6 row no-margin coin-info">
+									<div class="col-2 market_cap">
+										<h4>Market cap</h4>
+										<p>
+											Loading...
+										</p>
+									</div>
+									<div class="col-2 24h_volume">
+										<h4>24h Volume</h4>
+										<p>
+											Loading...
+										</p>
+									</div>
+									<div class="col-4 circ_supply">
+										<h4>Circ. Supply / Max. supply</h4>
+										<p>
+											Loading...
+										</p>
+									</div>
+									<div class="col-2 24h_change">
+										<h4>Change 24h</h4>
+										<p>
+											Loading...
+										</p>
+									</div>
+									<div class="col-2 7d_change">
+										<h4>Change 7d</h4>
+										<p>
+											Loading...
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<p></p>
+							<div class="tw-description">
+								Loading...
+							</div>
+							<p><br/></p>
+						</div>
+						<!-- Tab Area -->
+						<div class="col-12">
+							<nav>
+								<div class="nav nav-tabs" id="nav-tab" role="tablist">
+									<a class="nav-item nav-link active" id="tw-about-tab{{ item.pk }}" data-toggle="tab" href="#tw-about{{ item.pk }}" role="tab" aria-controls="tw-about{{ item.pk }}" aria-selected="false">About</a>
+									<a class="nav-item nav-link" id="tw-social-tab{{ item.pk }}" data-toggle="tab" href="#tw-social{{ item.pk }}" role="tab" aria-controls="tw-social{{ item.pk }}" aria-selected="false">Social</a>
+                                    {% if item.Product %}
+                                        <a class="nav-item nav-link" id="tw-Product-tab{{ item.pk }}" data-toggle="tab" href="#tw-Product{{ item.pk }}" role="tab" aria-controls="tw-Product{{ item.pk }}" aria-selected="false">Product</a>
+                                    {% endif %}
+                                    {% if item.Team %}
+									    <a class="nav-item nav-link" id="tw-Team-tab{{ item.pk }}" data-toggle="tab" href="#tw-Team{{ item.pk }}" role="tab" aria-controls="tw-Team{{ item.pk }}" aria-selected="false">Team</a>
+                                    {% endif %}
+                                    {% if item.Value %}
+									    <a class="nav-item nav-link" id="tw-Value-tab{{ item.pk }}" data-toggle="tab" href="#tw-Value{{ item.pk }}" role="tab" aria-controls="tw-Value{{ item.pk }}" aria-selected="false">Value</a>
+                                    {% endif %}
+								</div>
+							</nav>
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="tw-about{{ item.pk }}" role="tabpanel" aria-labelledby="nav-about-tab">
+									<p>{{ item.About|safe }}</p>
+								</div>
+								<div class="tab-pane fade tw-links" id="tw-social{{ item.pk }}" role="tabpanel" aria-labelledby="nav-social-tab">
+								</div>
+                                {% if item.Product %}
+                                    <div class="tab-pane fade" id="tw-Product{{ item.pk }}" role="tabpanel" aria-labelledby="nav-Product-tab">
+                                        {{ item.Product|safe }}
+                                    </div>
+                                {% endif %}
+                                {% if item.Team %}
+                                    <div class="tab-pane fade" id="tw-Team{{ item.pk }}" role="tabpanel" aria-labelledby="nav-Team-tab">
+                                        {{ item.Team|safe }}
+                                    </div>
+                                {% endif %}
+								{% if item.Value %}
+								    <div class="tab-pane fade" id="tw-Value{{ item.pk }}" role="tabpanel" aria-labelledby="nav-Value-tab">
+                                        {{ item.Value|safe }}
+								    </div>
+                                {% endif %}
+							</div>
+						</div>
+						<!-- End Tab Area -->
+						<div class="col-12">
+							<i class="mdi mdi-calendar-month-outline"></i>
+							{{ item.published_date|naturaltime }}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+            {% if items.paginator.num_pages > 2 %}
+				<div class="margin-auto col-12"><!-- Don't ask why height:100px; without this tag at all, the read more stopped working -->
+					<ul class="pagination">
+						<li class="page-item">
+						{% if items.has_previous %}
+							<a class="page-link" href="?page=1" aria-label="Previous">
+								<span aria-hidden="true">‹‹</span>
+								<span class="sr-only">First</span>
+							</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="?page={{ items.previous_page_number }}" aria-label="Previous">
+								<span aria-hidden="true">Prev</span>
+								<span class="sr-only">Prev</span>
+							</a>
+							{% endif %}
+						</li>
+						<li class="page-item active"><a class="page-link" href="#">{{ items.number }} of {{ items.paginator.num_pages }}</a></li>
+						{% if items.has_next %}
+						<li class="page-item">
+							<a class="page-link" href="?page={{ items.next_page_number }}" aria-label="Next">
+								<span aria-hidden="true">Next</span>
+								<span class="sr-only">Next</span>
+							</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="?page={{ items.paginator.num_pages }}" aria-label="Last">
+								<span aria-hidden="true">››</span>
+								<span class="sr-only">Last</span>
+							</a>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+            {% endif %}
+        </div> <!-- content -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+</div>
+<!-- END wrapper -->
+<script>
+	$(document).ready(function () {
+		get_currency_info();
+		update_currency_values();
+	});
+	window.setInterval(function() {
+		update_currency_values();
+	}, 60000);
+</script>
+{% endblock %}

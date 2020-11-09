@@ -1,0 +1,74 @@
+{% extends 'user_area/base.html' %}
+{% block content %}
+
+<div class="container content-page contentDetailsText">
+    <h1 class="grey-text text-lighten-4">{% if post.title %} {{ post.title }} {% endif %}</h1>
+    <p class="grey-text text-lighten-2">
+        {% if post.published_date %}
+        <h6 class="grey-text text-lighten-3">Published on {{ post.published_date }}</h6>
+        {% else %}
+            {% if PageRefAddContent == 'NewBeams' %}
+                <a class="btn" href="{% url 'PublishBeams' pk=post.pk %}">Publish</a>
+            {% elif PageRefAddContent == 'NewBlockchainEvents' %}
+                <a class="btn" href="{% url 'PublishEvents' pk=post.pk %}">Publish</a>
+            {% elif PageRefAddContent == 'NewBlockchainNews' %}
+                <a class="btn" href="{% url 'PublishNews' pk=post.pk %}">Publish</a>
+            {% elif PageRefAddContent == 'NewAI' %}
+                <a class="btn" href="{% url 'PublishAI' pk=post.pk %}">Publish</a>
+            {% elif PageRefAddContent == 'NewTA' %}
+                <a class="btn" href="{% url 'PublishTA' pk=post.pk %}">Publish</a>
+            {% elif PageRefAddContent == 'NewTW' %}
+                <a class="btn" href="{% url 'PublishTW' pk=post.pk %}">Publish</a>
+            {% endif %}
+        {% endif %}
+    </p>
+    <p>
+
+
+    <div class="">
+        <p><br/></p>
+        <div class="row">
+            <p class="clickable-img grey-text text-lighten-4">
+                {{ post.text|safe }}
+            </p>
+        </div>
+        <p></p></br><p></p></br><p></p>
+        <div class="grey-text text-lighten-4">
+            <h4><b>Comments:</b></h4>
+            {% if PageRefAddContent == 'NewBeams' %}
+                <h5><b><a href="{% url 'AddCommentBeams' pk=post.pk %}"><i class="material-icons" style="font-size:1.5rem;">add</i>Add Comment</a></b></h5>
+            {% endif %}
+            {% if PageRefAddContent == 'NewBlockchainEvents' %}
+                <h5><b><a href="{% url 'AddCommentEvent' pk=post.pk %}"><i class="material-icons" style="font-size:1.5rem;">add</i>Add Comment</a></b></h5>
+            {% endif %}
+            {% if PageRefAddContent == 'NewBlockchainNews' %}
+                <h5><b><a href="{% url 'AddCommentNews' pk=post.pk %}"><i class="material-icons" style="font-size:1.5rem;">add</i>Add Comment</a></b></h5>
+            {% endif %}
+            {% if PageRefAddContent == 'NewAI' %}
+                <h5><b><a href="{% url 'AddCommentAI' pk=post.pk %}"><i class="material-icons" style="font-size:1.5rem;">add</i>Add Comment</a></b></h5>
+            {% endif %}
+            {% if PageRefAddContent == 'NewTA' %}
+                <h5><b><a href="{% url 'AddCommentTA' pk=post.pk %}"><i class="material-icons" style="font-size:1.5rem;">add</i>Add Comment</a></b></h5>
+            {% endif %}
+            {% if PageRefAddContent == 'NewTW' %}
+                <h5><b></b><a href="{% url 'AddCommentTW' pk=post.pk %}"><i class="material-icons" style="font-size:1.5rem;">add</i></i>Add Comment</a></b></h5>
+            {% endif %}
+            <p></p>
+            {% for comment in post.comments.all reversed %}
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header"><b>{{ comment.author.username }}</b> wrote:</div>
+                    <div class="card-body">
+                        <p class="card-text">{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <div>
+                    <p>
+                        No comments here yet, be the first!
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

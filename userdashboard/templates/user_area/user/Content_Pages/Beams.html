@@ -1,0 +1,125 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% load humanize %}
+{% static "" as baseUrl %}
+{% block content %}
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h3 class="page-title">
+                            {{ pagetitle }}
+                            {% if user.is_superuser or user.is_staff %}
+                            <a href="{% url 'NewBeams' %}"><i class="mdi mdi-pencil-plus-outline"></i></a>
+                            <a href="{% url 'DraftsBeams' %}" class="btn btn-primary"><b>Drafts </b></a>
+                            {% endif %}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row grid beams-padding" style="height: fit-content; margin-top: 10px;">  <!-- col-3 09-29 -->
+                <div class="grid-sizer"></div>
+                {% for item in items %}
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 24px;">  <!-- col-3 09-29 -->
+                    {% if item.pair %}
+                    {% if user.is_superuser or user.is_staff %}
+                    <a href='{% url "DetailsBeams" pk=item.pk %}'>
+                        {% endif %}
+                        <h4 class="w-100 dashboard-beams-content-header {{ item.color_class }}">
+                            {{ item.pair }}
+                        </h4>
+                        {% if user.is_superuser or user.is_staff %}
+                    </a>
+                    {% endif %}
+                    {% endif %}
+                    <div class="dashboardblock-entry box-shadow dark-grey">
+                        <div class="dashboard-beams-content">
+                            {% if item.entry %}
+                            <div class="w-100" style=" border-bottom: 1px solid #303030; padding-bottom: 7px;">
+                                Entry:
+                                <span class="float-right no-list beam-data">{{ item.entry|linebreaksbr|safe }}</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            {% endif %}
+                            {% if item.targets %}
+                            <div class="w-100 target-beam"
+                                style="    border-bottom: 1px solid #303030; margin-top:7px; padding-bottom: 7px;">
+                                Targets:
+                                <span class="float-right no-list beam-data">{{ item.targets|linebreaksbr|safe }}</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            {% endif %}
+                            {% if item.stop_loss %}
+                            <div class="w-100" style=" margin-top:7px; ">
+                                Stop Loss:
+                                <span
+                                    class="float-right no-list beam-data">{{ item.stop_loss|linebreaksbr|safe }}</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            {% endif %}
+                            <div class="footer-beam">
+                                <div class="beam-exchange">{{ item.exchange }}</div>
+                                <div class="date-beam"> {{ item.published_date|naturaltime}} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if items.paginator.num_pages > 2 %}
+                <div class="col-12 margin-auto grid-item" style="height:100px;">
+                    <!-- Don't ask why height:100px; without this tag at all, the read more stopped working -->
+                    <ul class="pagination">
+                        <li class="page-item">
+                            {% if items.has_previous %}
+                            <a class="page-link" href="?page=1" aria-label="Previous">
+                                <span aria-hidden="true">‹‹</span>
+                                <span class="sr-only">First</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ items.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">Prev</span>
+                                <span class="sr-only">Prev</span>
+                            </a>
+                            {% endif %}
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">{{ items.number }} of
+                            {{ items.paginator.num_pages }}</a></li>
+                        {% if items.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ items.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">Next</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ items.paginator.num_pages }}" aria-label="Last">
+                                <span aria-hidden="true">››</span>
+                                <span class="sr-only">Last</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div> <!-- container-fluid -->
+    </div> <!-- content -->
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+{% endblock %}

@@ -1,0 +1,203 @@
+{% load static %}
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Provisn.com - Your all-inclusive crypto dashboard.">
+        <meta name="author" content="Provisn">
+        <meta property="og:type" content="website" />
+
+        <meta property="og:title" content="Provisn.com - Your all-inclusive crypto dashboard.">
+        <meta property="og:description" content="Provisn empowers the modern-day cryptocurrency enthusiast by providing the latest and most robust tools, indicators, and experiences within a single, streamlined platform.">
+        <meta property="og:image" content="https://provisn.com/static/img/og.jpg">
+        <meta property="og:url" content="https://provisn.com">
+
+        <meta property="og:site_name" content="Provisn.com - Your all-inclusive crypto dashboard.">
+        <meta name="twitter:image:alt" content="Provisn.com - Your all-inclusive crypto dashboard.">
+
+        <meta name="twitter:title" content="Provisn.com - Your all-inclusive crypto dashboard.">
+        <meta name="twitter:description" content="Provisn empowers the modern-day cryptocurrency enthusiast by providing the latest and most robust tools, indicators, and experiences within a single, streamlined platform.">
+        <meta name="twitter:image" content="https://provisn.com/static/img/og.jpg">
+        <meta name="twitter:card" content="summary_large_image">
+
+
+        <title>Provisn | Your all-inclusive crypto dashboard.</title>
+
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+
+		<!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+        <!-- Themify Icons CSS -->
+        <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+        <!-- Elegant Font Icons CSS -->
+        <link rel="stylesheet" href="{% static 'css/elegant-font-icons.css' %}">
+        <!-- Elegant Line Icons CSS -->
+        <link rel="stylesheet" href="{% static 'css/elegant-line-icons.css' %}">
+		<!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <!-- Slicknav CSS -->
+        <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+        <!-- animate CSS -->
+        <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+		<!-- Venobox CSS -->
+        <link rel="stylesheet" href="{% static 'css/venobox/venobox.css' %}">
+		<!-- OWL-Carousel CSS -->
+        <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+        <!-- swiper CSS -->
+        <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
+		<!-- Main CSS -->
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+		<!-- Responsive CSS -->
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+        <!-- particlejs CSS -->
+        <link rel="stylesheet" href="{% static 'css/particle_style.css' %}">
+
+        <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130484709-2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-130484709-2');
+        </script>
+    </head>
+    <body data-spy="scroll" data-target="#navmenu" data-offset="70">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehSoftwerey.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <header id="header" class="header_section">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="#" class="navbar-brand"><img src="{% static 'img/logo.png' %}" alt="Provisn"></a>
+                    <div class="d-flex menu-wrap">
+                        <div id="navmenu" class="mainmenu">
+                           <ul class="nav">
+
+
+                               <li><a data-scroll class="nav-link" href="#features">Features</a></li>
+                               <li><a data-scroll class="nav-link" href="#how">How it works</a></li>
+                               <li><a data-scroll class="nav-link" href="#pricing">Pricing</a></li>
+                               <li><a class="nav-link" href="#"  data-toggle="modal" data-target=".bs-contact-modal-lg">Contact</a></li>
+
+                               {% if user.is_authenticated %}
+                               <li><a data-scroll class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                               {% else %}
+                               <li><a data-scroll class="nav-link" href="{% url 'login' %}">Login</a></li>
+                               {% endif %}
+
+                            </ul>
+                        </div>
+                        <div class="menu-btn">
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'user_area' %}" class="button_1">Member Area</a>
+                            {% else %}
+                            <a href="#download" class="button_1">Start free trial</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-primary" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+		</header> <!-- Header -->
+
+		<main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+
+
+
+
+        <div class="modal fade bs-contact-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ContactFormModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title white" id="ContactFormModalLabel">Contact us.</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- CONTACT -->
+                        <section id="contact" class="contact_section padding">
+                            <div class="container">
+                                <div>
+                                    <div class="register-form2">
+                                        <form method="post" action="#" class="subscribe_form2">
+                                            <!--
+                                            <input type=“name” name=“name” id=“name” class=“form_input” placeholder=“Name”>
+                                            <input type=“email” name=“email” id=“subs-email” class=“form_input” placeholder=“Email”>
+                                            <textarea rows=“4" cols=“50” placeholder=“Message..” class=‘textarea_styled’></textarea>
+                                            -->
+                                            {% csrf_token %}
+                                            {{ MTAform.as_p }}
+                                            <div class="button-contact">
+                                                <button name="MTAform_Button" type="submit" class="submit">Send message</button>
+                                            </div>
+                                            <div id="subscribe-result">
+                                                <p class="subscription-success"></p>
+                                                <p class="subscription-error"></p>
+                                            </div>
+                                        </form>
+                                    </div><!-- Section Heading -->
+                                </div>
+                            </div>
+                        </section><!-- CONTACT -->
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+
+		<!-- jQuery Lib -->
+		<script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+		<!-- Tether JS -->
+		<script src="{% static 'js/vendor/tether.min.js' %}"></script>
+		<!-- Bootstrap JS -->
+		<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+		<!-- waypoints js -->
+		<script src="{% static 'js/vendor/jquery.waypoints.v2.0.3.min.js' %}"></script>
+		<!-- Slicknav JS -->
+		<script src="{% static 'js/vendor/jquery.slicknav.min.js' %}"></script>
+		<!-- OWL-Carousel JS -->
+		<script src="{% static 'js/vendor/owl.carousel.min.js' %}"></script>
+		<!-- swiper JS -->
+	    <script src="{% static 'js/vendor/swiper.min.js' %}"></script>
+		<!-- Counterup JS -->
+		<script src="{% static 'js/vendor/jquery.counterup.min.js' %}"></script>
+		<!-- Smooth Scroll JS -->
+		<script src="{% static 'js/vendor/smooth-scroll.min.js' %}"></script>
+		<!-- vendor JS -->
+		<script src="{% static 'js/vendor/venobox.min.js' %}"></script>
+		<!-- Ajaxchimp JS -->
+		<script src="{% static 'js/vendor/jquery.ajaxchimp.min.js' %}"></script>
+		<!-- Particle JS -->
+        <script src="{% static 'js/vendor/particles.js' %}"></script>
+		<!-- App JS -->
+        <script src="{% static 'js/vendor/app.js' %}"></script>
+		<!-- Wow JS -->
+		<script src="{% static 'js/vendor/wow.min.js' %}"></script>
+		<script src="{% static 'js/main.js' %}"></script>
+        <script src="https://kit.fontawesome.com/3eaab551dc.js"></script>
+        <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/6514146.js"></script>
+
+        <!-- Inline CSS from file to load static files -->
+        <style>
+
+        </style>
+    </body>
+</html>

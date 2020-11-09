@@ -1,0 +1,328 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="content-page">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <!-- <h4 class="page-title">{{ pagetitle }}</h4> -->
+                <h3 class="page-title">My Account</h3>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row no-margin">
+        <div class="col-12 dashboard-bg member-radius">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 text-center p-3" style="height: max-content;">
+                    {% if user.get_remaining_subscription_time_in_days %} <div class="border p1rem end-date-board">{% else %}<div class="border-red p1rem end-date-board">{% endif %}
+                    {% if user.get_remaining_subscription_time_in_days %}<div class="sub-ends"><span class="text-nowrap">Your subscription ends in</span></div>{% endif %}
+                    {% if user.get_remaining_subscription_time_in_days %}<h2 class="number_ends">{% else %}<h2 class="no-time-left">{% endif %}{% if user.get_remaining_subscription_time_in_days %} <span class='{{ user.get_subscription_time_text_class }}'> {{ user.get_remaining_subscription_time_in_days }} Days </span>  {% else %} <span class="sub-ends-done"> Subscription Ended </span> {% endif %} </h2>
+                    {% if user.get_remaining_subscription_time_in_days %}<div class="until"><span>{{ sub_until }}</span></div>{% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 p-3 member-info">
+                    <div class="row no-margin">
+                        <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 p-3 username-email">
+                            <span class="pr-1 greytext member-titles">Your username:</span>
+                            <br><br/>
+                            <span class="pr-1 greytext member-titles">Your email:</span>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-7 p-3 username-email">
+                            <span class="white member-titles"><b>{{ user.get_username }}</b></span>
+                            <br><br/>
+                            <span class="white member-titles"><b>{{ user.email }}</b></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 p-3 channel-block">
+                    <div class="bg-secondary p-1 telegram-block">
+                        {% if telegramForm %}
+                            <div class="telegram-title"><img src="{% static 'img/social/telegram_icon.png' %}" id="tg-icon"> Join the premium telegram group</div>
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ telegramForm.as_p }}
+                                <button class="button_1 btn w50" type="submit">
+                                     Submit
+                                </button>
+                            </form>
+                            <!--<div class="telegram-title">
+                                <img src="{% static 'img/social/telegram_icon.png' %}" id="tg-icon">
+                                <h3>Click the join the channel</h3>
+                            </div>-->
+                        {% else %}
+                            <p>
+                                <br>
+                                Use the following links to join our groups:
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        Subscriber Chat
+                                        <a href="https://t.me/joinchat/M5f-kw-DKU46jN_MfgUqaA">
+
+                                            <br/>
+                                            <small>https://t.me/joinchat/M5f-kw-DKU46jN_MfgUqaA</small>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                          Subscriber Update Broadcast
+                                        <a href="https://t.me/joinchat/M5f-k1WjT73mWXaVzbdo0g">
+
+                                            <br/>
+                                            <small>https://t.me/joinchat/M5f-k1WjT73mWXaVzbdo0g</small>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 dashboard-bg member-radius mt-2">
+            <div class="tab-list-header">
+                <h3 class="activity">Extend your subscription<div class="extend-hr"></div> </h3>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item choose-coin-btn">
+                        <a class="nav-link active" id="pills-ethereum-tab" data-toggle="pill" href="#pills-ethereum" role="tab" aria-controls="pills-ethereum" aria-selected="true">Ethereum</a>
+                    </li>
+                    <li class="nav-item choose-coin-btn">
+                        <a class="nav-link" id="pills-bitcoin-tab" data-toggle="pill" href="#pills-bitcoin" role="tab" aria-controls="pills-bitcoin" aria-selected="true">Bitcoin</a>
+                    </li>
+                    {% if not is_subscribed %}
+                        <li class="nav-item choose-coin-btn">
+                            <a class="nav-link" id="pills-cc_recurring-tab" data-toggle="pill" href="#pills-cc-recurring" role="tab" aria-controls="pills-cc-recurring" aria-selected="false">Credit Card</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-ethereum" role="tabpanel" aria-labelledby="pills-ethereum-tab">
+                    <div class="row">
+                        {% for pricing in pricings %}
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <div class="border text-center p-3 priceblock">
+                                    <h2>{{ pricing.show_name }}</h2>
+                                    <div class="price-membership price-block">
+                                        <h3>$ {{ pricing.cost }}<br>
+                                            <p class="saved-price color-success">
+                                                {% if pricing.savings %}saves 
+                                                <span class="color-success">$ {{ pricing.savings }}</span>
+                                                {% else %}{% endif %}
+                                            </p>
+                                        </h3>
+                                    </div>
+                                    <div class="price_coin">
+                                        <div class="white-board">
+                                            <img src="{% static 'img/btc.png' %}" width="15">
+                                            <span class="price_bitcoin" style="padding-right: 20px">{{ pricing.cost_bitcoin }}</span>
+                                            <img src="{% static 'img/ethereum.png' %}" width="15">
+                                            <span class="price_bitcoin">{{ pricing.cost_ethereum }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="payment_value_eth" id="pricing_{{ pricing.id }}" value="{{ pricing.id }}"/>
+                                    <button class="button_1 btn waves-effect waves-light w-100" type="submit">choose package</button>
+                                </form>
+                            </div>
+                        {% endfor %}
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <div class="border text-center p-3 priceblock coupon">
+                                <h4>Coupon</h4>
+                                <!-- <span>{{ pricing.cost_ethereum }}</span> -->
+                            </div>
+                            <form method="POST" style="margin-top: 5px;">
+                                {% csrf_token %}
+                                <input type="text" class="form-control"  onchange="var key = $('#couponInput').val();$('#coupon_value').val(key);" id="couponInput" placeholder="enter code.."/>
+                                <input id="coupon_value" type="hidden" name="coupon_value" />
+                                <button class="button_1 btn waves-effect waves-light w-100" type="submit">submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show" id="pills-bitcoin" role="tabpanel" aria-labelledby="pills-bitcoin-tab">
+                    <div class="row">
+                        {% for pricing in pricings %}
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <div class="border text-center p-3 priceblock">
+                                    <h2>{{ pricing.show_name }}</h2>
+                                    <div class="price-membership price-block">
+                                        <h3>$ {{ pricing.cost }}<br>
+                                            <p class="saved-price color-success">
+                                                {% if pricing.savings %}saves 
+                                                <span class="color-success">$ {{ pricing.savings }}</span>
+                                                {% else %}{% endif %}
+                                            </p>
+                                        </h3>
+                                    </div>
+                                    <div class="price_coin">
+                                        <div class="white-board">
+                                            <img src="{% static 'img/btc.png' %}" width="15">
+                                            <span class="price_bitcoin" style="padding-right: 20px">{{ pricing.cost_bitcoin }}</span>
+                                            <img src="{% static 'img/ethereum.png' %}" width="15">
+                                            <span class="price_bitcoin">{{ pricing.cost_ethereum }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="payment_value_btc" id="pricing_btc_{{ pricing.id }}" value="{{ pricing.id }}"/>
+                                    <button class="button_1 btn waves-effect waves-light w-100" type="submit">choose package</button>
+                                </form>
+                            </div>
+                        {% endfor %}
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <div class="border text-center p-3 priceblock coupon">
+                                <h4>Coupon</h4>
+                                <!-- <span>{{ pricing.cost_ethereum }}</span> -->
+                            </div>
+                            <form method="POST" style="margin-top: 5px;">
+                                {% csrf_token %}
+                                <input type="text" class="form-control"  onchange="var key = $('#couponInput_btc').val();$('#coupon_value_btc').val(key);" id="couponInput_btc" placeholder="enter code.."/>
+                                <input id="coupon_value_btc" type="hidden" name="coupon_value_btc"  />
+                                <button class="button_1 btn waves-effect waves-light w-100" type="submit">submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% if not is_subscribed %}
+                    <div class="tab-pane fade" id="pills-cc-recurring" role="tabpanel" aria-labelledby="pills-cc-tab">
+                        <div class="row">
+                            {% for pricing in pricings_credit_card %}
+                                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 p-3">
+                                    <div class="border text-center p-3 priceblock">
+                                        <h2>{{ pricing.show_name }}</h2>
+                                        <div class="price-membership price-block">
+                                            <h3>$ {{ pricing.cost }}<br>
+                                                <p class="saved-price color-success">
+                                                    {% if pricing.savings %}saves 
+                                                    <span class="color-success">$ {{ pricing.savings }}</span>
+                                                    {% else %}{% endif %}
+                                                </p>
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                    <form method="POST" id="cc_recurring_payment_form">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="subscription" class="subscription_mode">
+                                        <input type="hidden" name="payment_value_credit_card" value="{{ pricing.cost_cent }}" />
+                                        <button class="button_1 btn waves-effect waves-light w-100" type="submit">choose package</button>
+                                    </form>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-12 dashboard-bg member-radius mt-2">
+
+            <div class="tab-list-header">
+                <h3 class="activity">History<div class="activity-hr"></div> </h3>
+                <ul class="nav nav-pills mb-3" id="pills-history-tab" role="tablist">
+                    <li class="nav-item choose-coin-btn">
+                        <a class="nav-link active" id="pills-history-cryptocurrency-tab" data-toggle="pill" href="#pills-history-cryptocurrency" role="tab" aria-controls="pills-cryptocurrency" aria-selected="true">Crypto Currency</a>
+                    </li>
+                    <li class="nav-item choose-coin-btn">
+                        <a class="nav-link" id="pills-history-creditcard-tab" data-toggle="pill" href="#pills-history-creditcard" role="tab" aria-controls="pills-creditcard" aria-selected="true">Credit Card</a>
+                    </li>
+                    <li class="nav-item choose-coin-btn">
+                        <a class="nav-link" id="pills-invoices-tab" data-toggle="pill" href="#pills-invoices" role="tab" aria-controls="pills-invoices" aria-selected="true">Invoices</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content" id="pills-history-tabContent">
+                <div class="tab-pane fade show active" id="pills-history-cryptocurrency" role="tabpanel" aria-labelledby="pills-history-cryptocurrency-tab">
+                    <table class="w-100 table-member">
+                        <tr>
+                            <th>Package</th>
+                            <th>Date bought</th>
+                            <th>Status</th>
+                            <th>Status</th>
+                        </tr>
+                        {% for payment in payment_history_cryptocurrency reversed %}
+                            <tr>
+                                <td>{{ payment.package }}</td>
+                                <td>{{ payment.date_bought }}</td>
+                                <td>{{ payment.status }}</td>
+                                <td><a href="{% url 'order_creation_view' %}?order_id={{ payment.pk }}">Details</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="tab-pane fade show" id="pills-history-creditcard" role="tabpanel" aria-labelledby="pills-history-creditcard-tab">
+                    <table class="w-100 table-member">
+                        <tr>
+                            <th>Package</th>
+                            <th>Requested</th>
+                            <th>Fulfilled</th>
+                            <th>Paid</th>
+                        </tr>
+                        {% for payment in payment_history_creditcard reversed %}
+                            <tr>
+                                <td>{{ payment.pricing.show_name }}</td>
+                                <td>{{ payment.requested_at }}</td>
+                                {% if payment.fulfilled_at %}<td>{{ payment.fulfilled_at }}</td>{% else %}<td>Unfulfilled</td>{% endif %}
+                                <td>{{ payment.payment_fulfilled }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="tab-pane fade show" id="pills-invoices" role="tabpanel" aria-labelledby="pills-invoices-tab">
+                    {% if is_subscribed %}<a href="{% url 'cancel_user_subscription' %}">Cancel Subscription</a>{% endif %}
+                    <table class="w-100 table-member">
+                        <tr>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Online Invoice</th>
+                            <th>PDF Invoice</th>
+                            <th>Amount Due</th>
+                            <th>Amount Paid</th>
+                            <th>Amount Remaining</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                        </tr>
+                        {% for invoice in invoices reversed %}
+                            <tr>
+                                <td>{{ invoice.invoice_id }}</td>
+                                <td>{{ invoice.billing_type }}</td>
+                                <td>{{ invoice.status }}</td>
+                                <td><a href="{{ invoice.invoice_url }}">Click Here</a></td>
+                                <td><a href="{{ invoice.invoice_pdf }}">Click Here</a></td>
+                                <td>{{ invoice.amount_due }}</td>
+                                <td>{{ invoice.amount_paid }}</td>
+                                <td>{{ invoice.amount_remaining }}</td>
+                                <td>{{ invoice.created }}</td>
+                                <td>{{ invoice.updated }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+        <div style="position:absolute; right:15; bottom:0; background-color:#1d1d1d;" class="toast">
+            <div class="toast-header" style="background-color:#1d1d1d;">
+                <strong class="mr-auto">Notification</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body" style="background-color:#1d1d1d;">
+                {{ message }}
+            </div>
+        </div>
+
+    {% endfor %}
+{% endif %}
+{% endblock %}

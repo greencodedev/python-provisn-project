@@ -1,0 +1,142 @@
+{% extends 'user_area/base.html' %}
+{% block content %}
+
+<div class="content-page">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">
+                    {{ pagetitle }}
+                </h4>
+            </div>
+        </div>
+    </div>
+            <!-- end page title -->
+
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-s12 col-xl-6">
+                <div class="card">
+                    <a href="{% url 'BugReporter' %}">
+                        <div class="card-body">
+                            <h4 class="">Bug Reporter</h4>
+                            <p>
+                                Found a bug or you know how to improve Provisn.com? Feel free to enter them here.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-s12 col-xl-6">
+                <div class="card">
+                    <a href="{% url 'member' %}">
+                        <div class="card-body">
+                            <h4 class="">Member Page</h4>
+                            <p>Here you can modify your account or prolong your user subscription.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if user.is_superuser or user.is_staff %}
+
+    <div class="settingsBlock col-sm-12" style="height:auto;">
+        <h4><u>You are a Staff Member!</u></h4>
+        <p>Following options are available:</p>
+        <div class="row">
+            <div class="col-sm-12 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                    <a style="" href="/cpanel/frontpage/supportticket/">
+                        <div>
+                            <h5 style="color:rgb(215, 210, 202);"><u>Check Open Support Tickets</u></h5>
+                            <p style="color:rgb(215, 210, 202);">There are/is <b style="color:red;">{{ AmountOpenSupportTickets }}</b> Support Tickets Open.</p>
+                            <small style="color:rgb(215, 210, 202);">Click here to access them.</small>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a class="" style="color: rgb(215, 210, 202);" href="{% url 'user_changelog' %}">
+                            <div>
+                                <h5><u>Read Changelog</u></h5>
+                                <p>To get informed about the newest Plutus.Live updates click here.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a style=""  href="{% url 'admin:index' %}">
+                            <div>
+                                <h5 style="color:rgb(215, 210, 202);"><u>Access Admin Control Panel</u></h5>
+                                <p style="color:rgb(215, 210, 202);">Click here to administrate and moderate the website.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a class="" style="color: rgb(215, 210, 202);" href="{% url 'user_admin_tools' %}">
+                            <div>
+                                <h5 style="color:rgb(215, 210, 202);"><u>Access Staff Tools</u></h5>
+                                <p>You can find several tools for the moderation of the website here.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a style="" href="/cpanel/userdashboard/">
+                            <div>
+                                <h5 style="color:rgb(215, 210, 202);"><u>Manage Content</u></h5>
+                                <p style="color:rgb(215, 210, 202);">Click here to manage the content of the website</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a class="" style="color: rgb(215, 210, 202);" href="/cpanel/userdashboard/bugreport">
+                            <div>
+                                <h5 style="color:rgb(215, 210, 202);"><u>Open Bug Reports</u></h5>
+                                <p style="color:rgb(215, 210, 202);">There are/is <b style="color:red;">{{ AmountOpenBugReports }}</b> Bug Reports Open.</p>
+                                <small style="color:rgb(215, 210, 202);">Click here to access them.</small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a class="" style="color: rgb(215, 210, 202);" href="{% url 'ReferralPayOffs' %}">
+                            <div>
+                                <h5 style="color:rgb(215, 210, 202);"><u>Check Open Referral Pay Offs</u></h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

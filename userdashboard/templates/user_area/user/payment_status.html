@@ -1,0 +1,22 @@
+{% load static %}
+<div class="container">
+    <b>Current Status: <h2 id="payment-status">{{ status }}</h2></b>
+    <p><br/></p>
+    <p>
+        <small>As soon as the status is 'Done' you can leave this page, your purchase was successful.</small>
+        <br/>
+        <small>This can take up to a couple of hours!</small>
+        <br/>
+        <small>
+            Don't worry if you accidentally close this page, as soon as our payment provider marks your payment as
+            successful, your subscription will be prolonged automatically.
+        </small>
+        <br/>
+        <h3><b>Don't reload this page! It would create a new request with a new payment address!</b></h3>
+        <br/>
+        <p>
+            Feel free to contact our support about any problems you might experience.
+            <b>Add your Payment Order ID to every contact message, we'll need it to help you!</b>
+        </p>
+    </p>
+</div>

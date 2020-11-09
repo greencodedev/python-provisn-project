@@ -1,0 +1,24 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="content-page">
+    <div class="row">
+        <div class="col-12">
+            <div class="">
+                <h4 class="page-title">
+                    {{ pagetitle }}
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <iframe src="http://{{ iframe_addr }}/?nick={{ user.get_username }}" style="width:100%;min-height:70%;height:-webkit-fill-available;border:none;"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

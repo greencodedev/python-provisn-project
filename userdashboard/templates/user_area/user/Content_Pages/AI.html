@@ -1,0 +1,122 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box mb30">
+
+                        <h3 class="page-title">{{ pagetitle }}</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row grid beams-padding" style="height: fit-content">  <!-- col-3 09-29 -->
+
+                {% for item in items %}
+                    <!-- <div class="col-md-3 grid-item no-border"> -->
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 grid-item no-border" style="margin-bottom: 24px;">  <!-- col-3 09-29 -->
+                        {% if item.title %}
+                            <h1 class="dashboardTitle">
+                                {{ item.title }}
+                            </h1>
+                        {% endif %}
+                        <div class="card-box-ai">
+                            <h3 class="float-right">
+                                {% if item.coin.coin_icon %}
+                                    <img class="cryptocurrency-icons-content-list-page" src="{{ item.coin.coin_icon.url }}"/>
+                                {% endif %}
+                                {{ item.coin.short_name }}
+                            </h3>
+                            <div class="sc-gauge">
+                                <div class="sc-background">
+                                    <div style="transform:rotate({{ item.get_percentage_value_in_deg }}deg); transform-origin:top center;" class="sc-percentage {{ item.get_gauge_class }}"></div>
+                                    <div class="sc-mask2"></div>
+                                    <span class="sc-value">{{ item.get_percentage_value }}%</span>
+                                </div>
+                                <span class="sc-min">0</span>
+                                <span class="sc-max">100</span>
+                            </div>
+                            <div class="text-muted mb-0 ai-text">
+                                {{ item.get_text_field|safe }}
+                            </div>
+                            <small class="published">
+                                {{ item.published_date|naturaltime }}
+                            </small>
+
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="col-12 margin-auto" style="height:100px;"><!-- Don't ask why height:100px; without this tag at all, the read more stopped working -->
+
+
+                    <!-- <ul class="pagination">
+                                                    <li class="page-item">
+                                                    {% if items.has_previous %}
+                                                        <a class="page-link" href="?page=1" aria-label="Previous">
+                                                            <span aria-hidden="true">‹‹</span>
+                                                            <span class="sr-only">First</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page={{ items.previous_page_number }}" aria-label="Previous">
+                                                            <span aria-hidden="true">Prev</span>
+                                                            <span class="sr-only">Prev</span>
+                                                        </a>
+                                                    {% endif %}
+                                                    </li>
+                                                    <li class="page-item active"><a class="page-link" href="#">{{ items.number }} of {{ items.paginator.num_pages }}</a></li>
+
+                                                    {% if items.has_next %}
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page={{ items.next_page_number }}" aria-label="Next">
+                                                            <span aria-hidden="true">Next</span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </li>
+                                                     <li class="page-item">
+                                                        <a class="page-link" href="?page={{ items.paginator.num_pages }}" aria-label="Last">
+                                                            <span aria-hidden="true">››</span>
+                                                            <span class="sr-only">Last</span>
+                                                        </a>
+                                                    </li>
+                                                    {% endif %}
+                                                </ul> --!>
+
+
+                </div>
+
+
+
+            </div> <!-- container-fluid -->
+        </div> <!-- content -->
+
+
+
+    </div>
+
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+
+</div>
+
+
+{% endblock %}

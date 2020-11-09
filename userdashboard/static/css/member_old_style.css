@@ -1,0 +1,33 @@
+.slides {
+    height:250px !important;
+}
+
+.slider {
+    height: 290px !important;
+}
+
+
+.rounded {
+
+  border-radius: 25px;
+}
+
+main, footer, body {
+    background-color: rgb(42,48,59);
+}
+
+nav {
+    background-color: rgb(47, 57, 72) !important;
+}
+
+@media(max-width:600px) {
+    #navbarimg {
+        height:45px !important;
+    }
+}
+
+@media(min-width:601px) {
+    #navbarimg {
+        height:50px;margin-top:7px;
+    }
+}

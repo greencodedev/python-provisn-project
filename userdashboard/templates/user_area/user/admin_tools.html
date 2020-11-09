@@ -1,0 +1,114 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% block content %}
+    <!--
+    Collects all the objects of one topic and displays them here
+    -->
+    <div class="content-page">
+        <h1>{{ pagetitle }}</h1>
+        <h3 class="text-muted">{{ subHeader }}</h3>
+        <p><br/></p>
+        <div class="row">
+            <div class="col s12 m6" style="padding: 10px 10px 10px 10px;">
+                <div class="toolsContent">
+                    <h2>User Exports</h2>
+                    Don't overuse it when the user database is big.
+                    <br/>
+                    The index number does not represent an user id, this is an unsorted list.
+                    <p></p>
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <p><a type="button" class="btn btn-dark" href="{% url 'export_users_trial' %}">Export all trial users as csv</a></p>
+                        </li>
+
+                        <li>
+                            <p><a type="button" class="btn btn-dark" href="{% url 'export_users_subscribed' %}">Export all subscribed users as csv</a></p>
+                        </li>
+
+                        <li>
+                            <p><a type="button" class="btn btn-dark" href="{% url 'export_users_sub_and_trial' %}">Export all subscribed and trial users as csv</a></p>
+                        </li>
+
+                        <li>
+                            <p><a type="button" class="btn btn-dark" href="{% url 'export_users_all' %}">Export all users as csv</a></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col s12 m6 border" style="padding: 10px 10px 10px 10px;">
+                <div class="toolsContent">
+                    <h2>Extend your subscription</h2>
+                    <b>Warning!</b> This causes you to lose a lifetime subscription if you have one!
+                    <p></p>
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <p><a type="button" class="btn btn-dark" href="{% url 'staff_extend_subscription' %}">Click here to prolong your subscription</a></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col s12" style="padding: 10px 10px 10px 10px;">
+                <div class="toolsContent">
+                    <h2>Debugging Functions</h2>
+                    <b>These are for testing and debug purposes only! Please don't use them unless you know what you are doing.</b>
+                    <p></p>
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <p><a type="button" class="btn btn-dark" href="{% url 'staff_test_payment_successful' %}">Test Payment Successful Function</a></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col s12 m6 border" style="padding: 10px 10px 10px 10px;">
+                <div class="toolsContent">
+                    <h2>Update Crypto Currency Database</h2>
+                    <b>Warning!</b>
+                    <p>
+                        Use only if the currency you want to create a token spotlight for, isn't in the database. Creates a lot of work for our server and the coinpaprika API.
+                    </p>
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <p id="update_field">
+                                <a type="button" class="btn btn-dark" onclick="update_currency_db();">
+                                    Click here to request an
+                                </a>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col s12 m6 border" style="padding: 10px 10px 10px 10px;">
+                <div class="toolsContent">
+                    <h2>Test User Notifications</h2>
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <p id="">
+                                <a type="button" class="btn btn-dark" href="{% url 'test_user_notification' %}">
+                                    Test
+                                </a>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<style>
+    .btn-dark {
+        color:black;
+    }
+</style>
+<script>
+    function update_currency_db() {
+        if (window.location.hostname == '127.0.0.1')
+            var get_url = 'http://127.0.0.1:8000/member/api/get_all_crypto_currencies?save_as_models=True';
+        else
+            var get_url = 'https://provisn.com/member/api/get_all_crypto_currencies?save_as_models=True';
+
+        $.getJSON(get_url, function(data) {
+            // market ticker
+            $('#update_field').html('<img src="{% static "images/payment_ok.svg" %}">');
+        });
+    }
+</script>
+{% endblock %}

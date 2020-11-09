@@ -1,0 +1,253 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h3 class="page-title">
+                            {{ pagetitle }}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+            <div class="row">
+                {% for item in items %}
+                    <!-- Beam Block -->
+                    {% if item.is_beam %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 24px;"> 
+                            {% if item.pair %}
+                            {% if user.is_superuser or user.is_staff %}
+                            <a href='{% url "DetailsBeams" pk=item.pk %}'>
+                                {% endif %}
+                                <h4 class="w-100 dashboard-beams-content-header {{ item.color_class }}">
+                                    {{ item.pair }}
+                                </h4>
+                                {% if user.is_superuser or user.is_staff %}
+                            </a>
+                            {% endif %}
+                            {% endif %}
+                            <div class="dashboardblock-entry dark-grey">
+                                <div class="dashboard-beams-content">
+                                    {% if item.entry %}
+                                    <div class="w-100" style=" border-bottom: 1px solid #303030; padding-bottom: 7px;">
+                                        Entry:
+                                        <span class="float-right no-list beam-data">{{ item.entry|linebreaksbr|safe }}</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    {% endif %}
+                                    {% if item.targets %}
+                                    <div class="w-100 target-beam"
+                                        style="    border-bottom: 1px solid #303030; margin-top:7px; padding-bottom: 7px;">
+                                        Targets:
+                                        <span class="float-right no-list beam-data">{{ item.targets|linebreaksbr|safe }}</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    {% endif %}
+                                    {% if item.stop_loss %}
+                                    <div class="w-100" style=" margin-top:7px; ">
+                                        Stop Loss:
+                                        <span
+                                            class="float-right no-list beam-data">{{ item.stop_loss|linebreaksbr|safe }}</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="footer-beam">
+                                        <div class="beam-exchange">{{ item.exchange }}</div>
+                                        <div class="date-beam"> {{ item.published_date|naturaltime}} </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- Event Block -->
+                    {% elif item.is_event %}
+
+                    <!-- News Block -->
+                    {% elif item.is_news %}
+                        <div class="col-md-4 col-lg-3 grid-item borderR">
+                            {% if item.news_image %}
+                                <img class="card-img-top2 img-fluid" src="{{ item.news_image.url }}" alt="{{ item.get_title }}">
+                            {% else %}
+                                <div class="image-preview-parent">
+                                    <a target="_blank" href="{{ item.get_url }}">
+                                        <img class="card-img-top2 img-fuild preview-image-container" src="{{ item.image_url }}">
+
+                                        <h3 class="preview-image-title"></h3>
+                                        <div class="preview-image-description">
+                                            <p></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <div class="card-news {% if item.news_image %}card-news-radius-img{%endif%} content-list-block">
+                                <h3 class="float-right">
+                                    {% if item.coin.coin_icon %}
+                                    <img class="cryptocurrency-icons-content-list-page" src="{{ item.coin.coin_icon.url }}"/>
+                                    {% endif %}
+                                    {{ item.coin.short_name }}
+                                </h3>
+
+                                <a target="_blank" href="{{ item.news_url }}"><h1 class="truncate-news line-clamp">{% if item.title %} {{ item.get_title }} {% endif %}</h1></a>
+
+
+                                <div class="link-preview-wrapper d-none">
+
+                                    {{ item.text|safe|truncatechars:350 }}
+                                    </a>
+                                </div>
+
+                                <p class="published">
+                                    <i class="mdi mdi-calendar-month-outline"></i>
+                                    {{ item.published_date|naturaltime }}
+
+                                   <!-- <span class="tag-field">
+                                        {% for tag in item.tags.all %}
+
+                                            <a href="{% url 'search' %}?q={{ tag }}" class="badge tag">
+                                                {{ tag }}
+                                            </a>
+                                        {% endfor %}
+                                    </span> --!>
+                                </p>
+                                {% if item.coin.coinmarketcap_url %}
+                                <a href="{{ item.coin.coinmarketcap_url }}">
+                                    <button type="button" class="btn btn-outline-primary waves-effect waves-light width-md">View on Coinmarketcap</button>
+                                </a>
+                                {% endif %}
+                                <!-- Simple card -->
+                            </div>
+                        </div><!-- end col -->
+                    <!-- AI Block -->
+                    {% elif item.is_ai %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 grid-item" style="margin-bottom: 24px;">  <!-- col-3 09-29 -->
+                            {% if item.title %}
+                                <h1 class="dashboardTitle">
+                                    {{ item.title }}
+                                </h1>
+                            {% endif %}
+                            <div class="card-box-ai" style="box-shadow: none;">
+                                <h3 class="float-right">
+                                    {% if item.coin.coin_icon %}
+                                        <img class="cryptocurrency-icons-content-list-page" src="{{ item.coin.coin_icon.url }}"/>
+                                    {% endif %}
+                                    {{ item.coin.short_name }}
+                                </h3>
+                                <div class="sc-gauge">
+                                    <div class="sc-background">
+                                        <div style="transform:rotate({{ item.get_percentage_value_in_deg }}deg); transform-origin:top center;" class="sc-percentage {{ item.get_gauge_class }}"></div>
+                                        <div class="sc-mask2"></div>
+                                        <span class="sc-value">{{ item.get_percentage_value }}%</span>
+                                    </div>
+                                    <span class="sc-min">0</span>
+                                    <span class="sc-max">100</span>
+                                </div>
+                                <div class="text-muted mb-0 ai-text">
+                                    {{ item.get_text_field|safe }}
+                                </div>
+                                <small class="published">
+                                    {{ item.published_date|naturaltime }}
+                                </small>
+
+                            </div>
+                        </div>
+                    {% elif item.is_ta %} 
+                        <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12" style="margin-bottom: 24px;">
+                            <div class="dashboardblock-entry dark-grey general-block grid-item">
+                                <div style="height: fit-content; width: 100%">
+                                    <div class="bitcoin-short-info">
+                                        <i class="icon-linegraph wow bounceIn hovericon"></i>
+                                        <div class="row no-margin-side">
+                                            <!-- <span id="token-name"></span> <span class="short-name">{{ item.coin.name }}</span> -->
+                                            <p class="truncate-news line-clamp" style="font-size: 20px;">{% if item.title %} {{ item.title }} {% endif %}</p>
+                                        </div>
+                                        <span class="greytext small-size">TECHNICAL ANALYSIS</span>
+                                    </div>
+                                    <!-- Tab Area -->
+                                    <div class="col-12 btn_goSpot">
+                                        <a href="{{ item.url }}" target="_blank">
+                                            <span>View TA</span>
+                                        </a>
+                                    </div>
+                                    <!-- End Tab Area -->
+                                    <div class="col-12">
+                                        <i class="mdi mdi-calendar-month-outline"></i>
+                                        <span class="greytext small-size">{{ item.published_date|naturaltime }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end col -->
+                    {% elif item.is_tw %}
+                        <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12" style="margin-bottom: 24px;">
+                            <div class="dashboardblock-entry dark-grey general-block grid-item">
+                                <div style="height: fit-content; width: 100%">
+                                    <div class="bitcoin-short-info">
+                                        <i class="icon-magnifying-glass wow bounceIn hovericon"></i>
+                                        <div class="row no-margin-side">
+                                            <h3 class="short-name token-title"><!-- Token Name -->
+                                                {{ item.coin.name }}
+                                            </h3>
+                                        </div>     
+                                        <span class="greytext small-size">TOKEN SPOTLIGHT</span>                               
+                                    </div>
+                                    <!-- Tab Area -->
+                                    <div class="col-12 btn_goSpot">
+                                        <a href='{% url "DetailsTW" pk=item.pk %}'>
+                                            <span>View post</span>
+                                        </a>
+                                    </div>
+                                    <!-- End Tab Area -->
+                                    <div class="col-12">
+                                        <i class="mdi mdi-calendar-month-outline"></i>
+                                        <span class="greytext small-size">{{ item.published_date|naturaltime }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                {% if items.paginator %}
+                    <div class="text-center mt-5 col-lg-12 ml-3 mr-5" style="height:100px;"><!-- Don't ask why height:100px; without this tag at all, the read more stopped working -->
+                        {% if items.has_previous %}
+                            <a class="pb-3" href="?page=1" style="margin-right:10px;">&laquo; first</a>
+                            <a class="pb-3" href="?page={{ items.previous_page_number }}" style="margin-right:10px;">previous</a>
+                        {% endif %}
+                        <span class="current mb-3">
+                            Page {{ items.number }} of {{ items.paginator.num_pages }}.
+                        </span>
+
+                        {% if items.has_next %}
+                            <a class="pb-3" href="?page={{ items.next_page_number }}" style="margin-left:10px;">next</a>
+                            <a class="pb-3" href="?page={{ items.paginator.num_pages }}" style="margin-left:10px;">last &raquo;</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div> <!-- container-fluid -->
+    </div> <!-- content -->
+</div>
+<script>
+	$(document).ready(function () {
+		get_currency_info();
+		update_currency_values();
+	});
+	window.setInterval(function() {
+		update_currency_values();
+	}, 60000);
+</script>
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+{% endblock %}

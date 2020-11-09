@@ -1,0 +1,107 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Reset</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Provisn Crypto blockchain analysis.">
+        <meta name="keywords" content="Bitcoin, Cryptocurrency, Marketcap, Blockchain, Analysis, IOTA, Ethereum, Litecoin, Steem">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <!-- App css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    </head>
+    <body class="authentication-bg authentication-bg-pattern d-flex align-items-center">
+        {% if invalid %}{% url "password_reset_recover" as recovery_url %}
+		    <p>Sorry, this password reset link is invalid. You can still <a href="{{ recovery_url }}">request a new one</a>.</p>
+        {% else %}
+        <div class="account-pages w-100 mt-5 mb-5">
+            <div class="container">
+                <div class="row justify-content-center" id="pwd-container" >
+                    <div class="card" style="border: 0 solid #414d5f;">
+                        <div class="card-body p-4">
+                            <div class="text-center mb-4 login-logo">
+                                <a href="index.html">
+                                    <span><img src="{% static 'img/logo.png' %}" alt="Provisn"></span>
+                                </a>
+                            </div>
+                            <section class="login-form">
+                                <form method='post' action="{% url 'password_reset_reset' token %}" id='login-form' style='display:block; margin-top:50px;' class="rounded">
+                                    <div class="form-group mb-5">
+                                        <h4 style="color: white;">Password Recovery</h4>
+                                    </div>
+                                    {% csrf_token %}
+                                    <!-- {{ form.as_p }} -->
+                                    <div class="form-group mb-3">
+                                        <label for="id_password1">New Password</label>
+                                        <input class="form-control" type="password" name="password1" id="id_password1" required placeholder="new password">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="id_password2">New Password(confirm)</label>
+                                        <input class="form-control" type="password" name="password2" id="id_password2" required placeholder="confirm password">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <button type='submit' class="btn btn-lg btn-dark btn-primary btn-block">Set new password</button>
+                                    </div>
+                                </form>
+                                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+                                <script src="https://unpkg.com/feather-icons"></script>
+                                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+                                <link href="{% static 'css/app.css' %}" rel="stylesheet" type="text/css" />
+                            </section>
+                        </div>
+                        <div class="other-link" ><small><a href="{% url 'frontpage' %}" >Take me back to the frontpage</a></small></div>
+                        <div class="other-link" ><small><a href="{% url 'login' %}" >Log into an existing account instead</a></small></div>
+                        <div class="other-link" ><small><a href="{% url 'frontpage' %}#download" >Create an account instead</a></small></div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <style>
+            .form-group label {
+                font-size: 0.9rem;
+            }
+            .form-group.mb-3 {
+                margin-bottom: 1.5rem !important;
+            }
+            .login-form p {
+                display: block; 
+                padding: 10px 0px; 
+                border: 0 solid #414d5f !important;
+                color: white;
+                font-size: 20px;
+            }
+            .card {
+                background-color: #303030 !important;
+            }            
+            .card-body.p-4 {
+                padding: 2.25rem !important;
+                width: 450px;
+                margin-bottom: 20px;
+            }
+            .card a, 
+            .card a:hover {
+                color: white;
+                text-decoration: none;
+            }
+            .login-form a, 
+            .login-form a:hover {
+                color: black;
+                font-size: 16px;
+                padding: 10px 0px;
+                width: 100%;
+                background: linear-gradient(65deg, #e5f3fb 10%, #d1edfd 100%);
+                border-radius: .15rem;
+            }
+            div.other-link {
+                margin: 5px 0px;
+                text-align: center;
+            }
+        </style>
+    </body>
+</html>

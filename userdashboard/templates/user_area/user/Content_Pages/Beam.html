@@ -1,0 +1,72 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+
+                        <h3 class="page-title">Beam</h3>
+                    </div>
+                    {% if user.is_superuser or user.is_staff %}
+                        {% if not post.published_date %}
+                        <a style="" class="btn btn-primary" href="{% url 'PublishBeams' pk=post.pk %}">Publish</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!-- Start Content -->
+            <div class="row">
+                <div class="col-3"  style="">
+                        {% if post.pair %}<h4 class="w-100 dashboard-beams-content-header">{{ post.pair }}</h4>{% endif %}
+                        <div class="dashboardblock-entry">
+                            <div class="dashboard-beams-content">
+                                {% if post.entry %}
+                                <div class="w-100">
+                                    Entry:
+                                    <span class="float-right no-list">{{ post.entry|safe }}</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                                {% endif %}
+                                {% if post.targets %}
+                                <div class="w-100">
+                                    Targets:
+                                    <span class="float-right no-list">{{ post.targets|linebreaksbr|safe }}</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                                {% endif %}
+                                {% if post.stop_loss %}
+                                <div class="w-100">
+                                    Stop Loss:
+                                    <span class="float-right no-list">{{ post.stop_loss|safe }}</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                                {% endif %}
+                                <div class="footer-beam">
+                                    <div class="beam-exchange">{{ post.exchange }}</div><div class="date-beam">  {{ post.published_date|naturaltime}}  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- end row -->
+            </div>
+            <!-- end card-box-->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,157 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<!--
+    Roundtable has a form with a textbox and a button to send messages and loads the subpage from /chatmessages
+    into messages-content
+    -->
+    <script src="{% static 'javascript/linkifyjs/linkify.min.js' %}"></script>
+    <script src="{% static 'javascript/linkifyjs/linkify-jquery.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // Loads /chatmessages into the div id messages-content
+        var isFirefox = /firefox/i.test(navigator.userAgent);
+        var done = 0;
+        function updateChatMessages(events) {
+            if (done < 1) {
+                $("#messages-content-wrapper").scrollTop($("#messages-content-wrapper")[0].scrollHeight);
+                done++
+            }
+            //if (!isFirefox)
+                $('#messages-content').load('{% url 'chatmessages' %}');
+            /*else {
+                $('#messages-content').html("<b>Sorry the roundtable doesn't support firefox currently because of browser limitations.<br/>We're working on it.</b>");
+                $('#messages-content').css('overflow', 'hidden');
+                $('.form-control').hide();
+                $('.btn').hide();
+            }*/
+
+        }
+        $(document).ready(function() {
+
+        });
+        window.setInterval(function() {
+            updateChatMessages();
+        }, 1000); // Change the number in ms to change the chat update timer
+
+        $(document).ready(function () {
+            $('textarea[data-limit-rows=true]').on('keypress', function (event) {
+                var textarea = $(this),
+                text = textarea.val(),
+                numberOfLines = (text.match(/\n/g) || []).length + 1,
+                maxRows = parseInt(textarea.attr('rows'));
+
+                if (event.which === 13 && numberOfLines === maxRows ) {
+                    return false;
+                }
+            });
+
+            updateChatMessages();
+            $("#messages-content-wrapper").scrollTop($("#messages-content-wrapper")[0].scrollHeight);
+            $(window).on('load', function () {
+                $("#messages-content-wrapper").scrollTop($("#messages-content-wrapper")[0].scrollHeight);
+            });
+        });
+
+        var scrolled = false;
+        function updateScroll() {
+            $("#messages-content-wrapper").scrollTop($("#messages-content-wrapper")[0].scrollHeight);
+        }
+
+
+</script>
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+
+                        <h4 class="page-title">Roundtable</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!-- Start Content -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-box">
+
+                        <h1>Plutus Roundtable</h1>
+
+                        <div id="messages-content-wrapper" style="overflow-y: scroll; height:72%;">
+                            <div id="messages-content" style="padding-left:25px;">
+                            </div>
+                        </div>
+                        <style>
+                                    #messages-content {
+                                        overflow-x: hidden;
+                                        scrollbar-face-color: #646464 !important;
+                                          scrollbar-base-color: #646464 !important;
+                                          scrollbar-3dlight-color: #646464 !important;
+                                          scrollbar-highlight-color: #646464 !important;
+                                          scrollbar-track-color: #000 !important;
+                                          scrollbar-arrow-color: #000 !important;
+                                          scrollbar-shadow-color: #646464 !important;
+                                          scrollbar-dark-shadow-color: #646464 !important;
+                                    }
+                                    @-moz-document url-prefix() {
+                                        #messages-content-wrapper {
+                                            overflow: hidden;
+                                            overflow-y: hidden;
+                                        }
+                                    }
+                                    ::-webkit-scrollbar { width: 8px; height: 3px;}
+                                    ::-webkit-scrollbar-button {  background-color: #666; }
+                                    ::-webkit-scrollbar-track {  background-color: #646464;}
+                                    ::-webkit-scrollbar-track-piece { background-color: #373a40;}
+                                    ::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
+                                    ::-webkit-scrollbar-corner { background-color: #646464;}}
+                                    ::-webkit-resizer { background-color: #666;}
+                        </style>
+
+                        <form method="POST" class="" >
+                            <div class="form-group">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button class="btn hoverable waves-effect" type="submit">
+                                    <i class="material-icons left">send</i><b>Submit</b>
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end card-box-->
+
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card-box-->
+
+            <div class="addthis_inline_share_toolbox"></div>
+
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+</div>
+{% endblock %}

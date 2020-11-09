@@ -1,0 +1,30 @@
+{% extends 'user_area/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        <div class="container content-page">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">{{ pagetitle }}</h4>
+                </div>
+            </div>
+            <p><br/></p>
+            <div class="col-12">
+                <form method="POST" enctype="multipart/form-data" class="post-form">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    {{ form.as_p }}
+                    <!--<button type="submit" class="btn waves-effect waves-light">Submit</button>-->
+                    <br/>
+                    <button class="btn btn-primary" type="submit">
+                         Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+    </script>
+    <style>
+    </style>
+{% endblock %}
