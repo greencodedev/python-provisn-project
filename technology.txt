@@ -1,0 +1,7 @@
+This site is the bitcoin business site to create and manage crypto(bitcoin).
+This project is based on Python, Django, Bootstrap, webflow.js and HTML5/CSS.
+I made Admin panel and first landing page using Bootstrap, jQuery and etc. but now first landing page was updated by another developer using webflow.js
+database: mongodb
+admin panel path : python-provisn-project/userdashboard/templates/user_area/user/ (in git)
+front-end(landing page) : python-provisn-project/frontpage/templates/frontpage/
+live site : provisn.com
