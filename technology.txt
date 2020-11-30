@@ -5,3 +5,27 @@ database: mongodb
 admin panel path : python-provisn-project/userdashboard/templates/user_area/user/ (in git)
 front-end(landing page) : python-provisn-project/frontpage/templates/frontpage/
 live site : provisn.com
+
+// install project environment
+python -m venv venv
+venv\Scripts\activate.bat
+// install python packages.
+pip install -r requirements.txt
+
+pip install <package name>
+pip freeze > requirements.txt
+
+// install project's database
+1. python manage.py makemigrations
+2. python manage.py makemigrations ContentScraper
+3. python manage.py makemigrations TelegramHandler
+4. python manage.py migrate
+
+python manage.py Cryptocalendar_Scraper
+python manage.py CoinMarketCap-Calendar-Scraper
+
+// run project
+5. python manage.py runserver
+
+// create user at console
+python manage.py createsuperuser
